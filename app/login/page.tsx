@@ -2,14 +2,31 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("login attempt", { email });
+    setError("");
+    setLoading(true);
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    setLoading(false);
+
+    if (error) {
+      setError(error.message);
+      return;
+    }
+
+    router.push("/dashboard");
   }
 
   return (
@@ -32,7 +49,13 @@ export default function LoginPage() {
           <h1 className="font-serif text-3xl font-semibold leading-tight">Welcome back to your revenue desk.</h1>
           <p className="text-ink/55 mt-3 leading-6">Log in to see what needs attention today.</p>
 
-          <form onSubmit={handleSubmit} className="mt-9 border border-ink/20">
+          {error && (
+            <div className="mt-6 border border-loss/30 bg-loss/5 text-loss text-sm px-4 py-3">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="mt-6 border border-ink/20">
             <div className="p-6 space-y-5">
               <div>
                 <label htmlFor="email" className="text-xs font-mono tracking-widest text-ink/45">EMAIL</label>
@@ -50,8 +73,12 @@ export default function LoginPage() {
                   className="w-full mt-2 bg-transparent border-b border-ink/25 py-2.5 outline-none focus:border-ink transition placeholder:text-ink/30" />
               </div>
             </div>
-            <button type="submit" className="w-full bg-ink text-paper py-4 font-medium hover:bg-ink/85 transition">
-              Log in
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-ink text-paper py-4 font-medium hover:bg-ink/85 transition disabled:opacity-50"
+            >
+              {loading ? "Logging in…" : "Log in"}
             </button>
           </form>
 

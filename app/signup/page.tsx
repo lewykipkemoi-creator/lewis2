@@ -2,15 +2,38 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [businessName, setBusinessName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("signup attempt", { businessName, email });
+    setError("");
+    setLoading(true);
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { business_name: businessName },
+      },
+    });
+
+    setLoading(false);
+
+    if (error) {
+      setError(error.message);
+      return;
+    }
+
+    router.push("/dashboard");
   }
 
   return (
@@ -33,7 +56,13 @@ export default function SignupPage() {
           <h1 className="font-serif text-3xl font-semibold leading-tight">Open your first revenue report.</h1>
           <p className="text-ink/55 mt-3 leading-6">Set up Lewy in a few minutes. No card required to start.</p>
 
-          <form onSubmit={handleSubmit} className="mt-9 border border-ink/20">
+          {error && (
+            <div className="mt-6 border border-loss/30 bg-loss/5 text-loss text-sm px-4 py-3">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="mt-6 border border-ink/20">
             <div className="p-6 space-y-5">
               <div>
                 <label htmlFor="business" className="text-xs font-mono tracking-widest text-ink/45">BUSINESS NAME</label>
@@ -49,13 +78,17 @@ export default function SignupPage() {
               </div>
               <div>
                 <label htmlFor="password" className="text-xs font-mono tracking-widest text-ink/45">PASSWORD</label>
-                <input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
+                <input id="password" type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="w-full mt-2 bg-transparent border-b border-ink/25 py-2.5 outline-none focus:border-ink transition placeholder:text-ink/30" />
               </div>
             </div>
-            <button type="submit" className="w-full bg-ink text-paper py-4 font-medium hover:bg-ink/85 transition">
-              Create account
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-ink text-paper py-4 font-medium hover:bg-ink/85 transition disabled:opacity-50"
+            >
+              {loading ? "Creating account…" : "Create account"}
             </button>
           </form>
 

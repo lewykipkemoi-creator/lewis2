@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import type { Session } from "@supabase/supabase-js";
 
 const nav = [
   { n: "01", label: "Overview", href: "/dashboard" },
@@ -17,6 +20,35 @@ const nav = [
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [session, setSession] = useState<Session | null>(null);
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setChecked(true);
+      if (!data.session) router.push("/login");
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      if (!session) router.push("/login");
+    });
+
+    return () => listener.subscription.unsubscribe();
+  }, [router]);
+
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+    router.push("/login");
+  }
+
+  if (!checked) {
+    return <div className="min-h-screen bg-paper flex items-center justify-center text-ink/40 text-sm">Loading…</div>;
+  }
+
+  if (!session) return null;
 
   return (
     <div className="min-h-screen bg-paper text-ink flex">
@@ -47,8 +79,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </nav>
 
         <div className="border-t border-ink/15 px-6 py-4">
-          <div className="text-sm font-medium">Amina's Salon</div>
-          <div className="text-xs text-ink/45 mt-0.5">Owner account</div>
+          <div className="text-sm font-medium truncate">{session.user.email}</div>
+          <button onClick={handleSignOut} className="text-xs text-ink/45 hover:text-ink underline mt-1">
+            Sign out
+          </button>
         </div>
       </aside>
 
