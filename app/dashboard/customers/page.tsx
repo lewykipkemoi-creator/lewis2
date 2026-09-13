@@ -2,10 +2,10 @@ import Reveal from "@/components/Reveal";
 
 export default function CustomersPage() {
   return (
-    <div className="max-w-5xl px-6 lg:px-10 py-8">
+    <div className="max-w-5xl px-4 sm:px-6 lg:px-10 py-6 lg:py-8">
       <Reveal>
         <div className="text-[11px] font-mono text-white/35 uppercase tracking-wide">Customers</div>
-        <h1 className="text-2xl font-semibold mt-1.5">Business memory, not just messages.</h1>
+        <h1 className="text-xl sm:text-2xl font-semibold mt-1.5">Business memory, not just messages.</h1>
         <p className="text-white/45 text-[14px] mt-1.5">Every interaction builds one profile, across every channel.</p>
       </Reveal>
 
