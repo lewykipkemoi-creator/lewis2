@@ -8,9 +8,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["Fraunces", "ui-serif", "serif"],
-        sans: ["Inter", "ui-sans-serif", "sans-serif"],
-        mono: ['"IBM Plex Mono"', "ui-monospace", "monospace"],
+        sans: ["Sora", "Inter", "ui-sans-serif", "sans-serif"],
+        body: ["Inter", "ui-sans-serif", "sans-serif"],
       },
       colors: {
         ink: "#14150F",
@@ -18,6 +17,26 @@ const config: Config = {
         loss: "#B23A2E",
         gain: "#1F6F4A",
         seal: "#C9A227",
+      },
+      keyframes: {
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(28px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-18px)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        fadeUp: "fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        float: "float 7s ease-in-out infinite",
+        floatSlow: "float 10s ease-in-out infinite",
+        marquee: "marquee 30s linear infinite",
       },
     },
   },
