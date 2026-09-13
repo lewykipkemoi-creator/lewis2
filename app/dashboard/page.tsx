@@ -1,10 +1,12 @@
+import Reveal from "@/components/Reveal";
+
 const metrics = [
-  { label: "Revenue at risk", value: "KES 86,400", tone: "loss", note: "12 conversations need attention" },
-  { label: "Revenue recovered", value: "KES 142,900", tone: "gain", note: "This month" },
-  { label: "Active opportunities", value: "23", tone: "ink", note: "Across all channels" },
-  { label: "AI resolution rate", value: "81%", tone: "ink", note: "Handled without a human" },
-  { label: "Avg. response time", value: "8 sec", tone: "gain", note: "vs. industry avg 42 hrs" },
-  { label: "Conversion rate", value: "16.4%", tone: "ink", note: "Conversation to sale" },
+  { label: "Revenue at risk", value: "KES 86,400", tone: "text-red-400", note: "12 conversations need attention" },
+  { label: "Revenue recovered", value: "KES 142,900", tone: "text-emerald-400", note: "This month" },
+  { label: "Active opportunities", value: "23", tone: "text-white", note: "Across all channels" },
+  { label: "AI resolution rate", value: "81%", tone: "text-white", note: "Handled without a human" },
+  { label: "Avg. response time", value: "8 sec", tone: "text-emerald-400", note: "vs. industry avg 42 hrs" },
+  { label: "Conversion rate", value: "16.4%", tone: "text-white", note: "Conversation to sale" },
 ];
 
 const funnel = [
@@ -28,79 +30,73 @@ const activity = [
   { text: "Lewy sent a follow-up to a customer who went quiet after pricing questions", time: "1 hr ago" },
 ];
 
-function toneClass(tone: string) {
-  if (tone === "loss") return "text-loss";
-  if (tone === "gain") return "text-gain";
-  return "text-ink";
-}
-
 export default function DashboardOverview() {
   return (
-    <div className="max-w-6xl px-8 lg:px-12 py-10">
-      <div className="text-xs font-mono tracking-widest text-ink/40">TODAY, SEPT 12</div>
-      <h1 className="font-serif text-3xl font-semibold mt-2">Good morning, Amina.</h1>
-      <p className="text-ink/55 mt-2">
-        3 things need your attention — KES 86,400 is currently at risk.
-      </p>
+    <div className="max-w-5xl px-6 lg:px-10 py-8">
+      <Reveal>
+        <div className="text-[11px] font-mono text-white/35 uppercase tracking-wide">Today, Sept 12</div>
+        <h1 className="text-2xl font-semibold mt-1.5">Good morning, Amina.</h1>
+        <p className="text-white/45 text-[14px] mt-1.5">
+          3 things need your attention — KES 86,400 is currently at risk.
+        </p>
+      </Reveal>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 mt-10 border-t border-l border-ink/15">
+      <Reveal delay={100} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-8">
         {metrics.map((m) => (
-          <div key={m.label} className="border-b border-r border-ink/15 p-6">
-            <div className="text-sm text-ink/50">{m.label}</div>
-            <div className={`font-mono tabular text-2xl font-semibold mt-2 ${toneClass(m.tone)}`}>{m.value}</div>
-            <div className="text-xs text-ink/40 mt-1">{m.note}</div>
+          <div key={m.label} className="rounded-xl border border-white/8 bg-white/[0.02] p-4">
+            <div className="text-[12px] text-white/40">{m.label}</div>
+            <div className={`text-xl font-semibold mt-1.5 ${m.tone}`}>{m.value}</div>
+            <div className="text-[11px] text-white/30 mt-1">{m.note}</div>
           </div>
         ))}
-      </div>
+      </Reveal>
 
-      <div className="grid lg:grid-cols-2 gap-8 mt-10">
-        <div className="border border-ink/20">
-          <div className="border-b border-ink/15 px-6 py-4 font-serif font-semibold">Conversation to revenue</div>
-          <div className="p-6 space-y-4">
+      <div className="grid lg:grid-cols-2 gap-5 mt-6">
+        <Reveal delay={150} className="rounded-xl border border-white/8 bg-white/[0.02]">
+          <div className="border-b border-white/8 px-5 py-3 text-[14px] font-medium">Conversation to revenue</div>
+          <div className="p-5 space-y-3.5">
             {funnel.map((f) => (
-              <div key={f.stage} className="flex items-center gap-4">
-                <div className="w-40 text-sm text-ink/60 shrink-0">{f.stage}</div>
-                <div className="flex-1 h-2 bg-ink/10">
+              <div key={f.stage} className="flex items-center gap-3">
+                <div className="w-32 text-[12px] text-white/50 shrink-0">{f.stage}</div>
+                <div className="flex-1 h-1.5 bg-white/8 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-ink"
+                    className="h-full bg-gradient-to-r from-indigo-500 to-cyan-400 rounded-full"
                     style={{ width: `${(f.count / funnel[0].count) * 100}%` }}
                   />
                 </div>
-                <div className="w-10 text-right font-mono tabular text-sm">{f.count}</div>
+                <div className="w-8 text-right font-mono text-[12px] text-white/60">{f.count}</div>
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
 
-        <div className="border border-loss/30">
-          <div className="border-b border-loss/20 px-6 py-4 font-serif font-semibold flex items-center gap-2">
-            <span>Revenue Leak Detector</span>
-          </div>
-          <div className="divide-y divide-ink/10">
+        <Reveal delay={200} className="rounded-xl border border-red-500/20 bg-red-500/[0.03]">
+          <div className="border-b border-red-500/15 px-5 py-3 text-[14px] font-medium">Revenue Leak Detector</div>
+          <div className="divide-y divide-white/6">
             {leaks.map((leak) => (
-              <button key={leak.title} className="w-full text-left px-6 py-4 hover:bg-loss/5 transition">
-                <div className="flex justify-between items-start gap-4">
-                  <div className="text-sm">{leak.title}</div>
-                  <div className="font-mono tabular text-loss text-sm shrink-0">{leak.value}</div>
+              <button key={leak.title} className="w-full text-left px-5 py-3.5 hover:bg-red-500/5 transition">
+                <div className="flex justify-between items-start gap-3">
+                  <div className="text-[13px] text-white/80">{leak.title}</div>
+                  <div className="font-mono text-red-400 text-[13px] shrink-0">{leak.value}</div>
                 </div>
-                <div className="text-xs text-ink/40 mt-1">{leak.age}</div>
+                <div className="text-[11px] text-white/30 mt-1">{leak.age}</div>
               </button>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
 
-      <div className="border border-ink/20 mt-8">
-        <div className="border-b border-ink/15 px-6 py-4 font-serif font-semibold">AI activity</div>
-        <div className="divide-y divide-ink/10">
+      <Reveal delay={250} className="rounded-xl border border-white/8 bg-white/[0.02] mt-6">
+        <div className="border-b border-white/8 px-5 py-3 text-[14px] font-medium">AI activity</div>
+        <div className="divide-y divide-white/6">
           {activity.map((a, i) => (
-            <div key={i} className="flex justify-between items-center px-6 py-3.5 text-sm">
-              <div className="text-ink/70">{a.text}</div>
-              <div className="text-xs font-mono text-ink/35 shrink-0 ml-4">{a.time}</div>
+            <div key={i} className="flex justify-between items-center px-5 py-3 text-[13px]">
+              <div className="text-white/60">{a.text}</div>
+              <div className="text-[11px] font-mono text-white/30 shrink-0 ml-4">{a.time}</div>
             </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

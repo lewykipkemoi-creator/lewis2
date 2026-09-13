@@ -1,7 +1,10 @@
+import Reveal from "@/components/Reveal";
+
 const groups = [
   {
     title: "Waiting for a response",
-    color: "text-loss",
+    color: "text-red-400",
+    border: "border-red-500/20",
     items: [
       { name: "Peter M.", detail: "Bulk order pricing — 6 hrs waiting", value: "KES 250,000" },
       { name: "Grace K.", detail: "Delivery question — 4 hrs waiting", value: "KES 18,000" },
@@ -9,7 +12,8 @@ const groups = [
   },
   {
     title: "Scheduled by Lewy",
-    color: "text-seal",
+    color: "text-amber-400",
+    border: "border-amber-500/20",
     items: [
       { name: "David O.", detail: "Second follow-up — sends tomorrow, 9:00 AM", value: "KES 6,500" },
       { name: "Wanjiru T.", detail: "Check-in — sends in 2 days", value: "KES 3,000" },
@@ -17,7 +21,8 @@ const groups = [
   },
   {
     title: "Already followed up",
-    color: "text-gain",
+    color: "text-emerald-400",
+    border: "border-emerald-500/20",
     items: [
       { name: "Jane W.", detail: "Confirmed appointment reminder sent", value: "KES 18,000" },
     ],
@@ -26,29 +31,31 @@ const groups = [
 
 export default function FollowupsPage() {
   return (
-    <div className="max-w-6xl px-8 lg:px-12 py-10">
-      <div className="text-xs font-mono tracking-widest text-ink/40">FOLLOW-UPS</div>
-      <h1 className="font-serif text-3xl font-semibold mt-2">Nothing gets forgotten.</h1>
-      <p className="text-ink/55 mt-2">What Lewy is about to do, what's already done, and what's still waiting.</p>
+    <div className="max-w-5xl px-6 lg:px-10 py-8">
+      <Reveal>
+        <div className="text-[11px] font-mono text-white/35 uppercase tracking-wide">Follow-ups</div>
+        <h1 className="text-2xl font-semibold mt-1.5">Nothing gets forgotten.</h1>
+        <p className="text-white/45 text-[14px] mt-1.5">What Lewy is about to do, what's already done, and what's still waiting.</p>
+      </Reveal>
 
-      <div className="space-y-8 mt-10">
-        {groups.map((group) => (
-          <div key={group.title} className="border border-ink/20">
-            <div className={`px-6 py-3 border-b border-ink/15 font-mono text-xs tracking-widest ${group.color}`}>
+      <div className="space-y-4 mt-8">
+        {groups.map((group, gi) => (
+          <Reveal key={group.title} delay={gi * 100} className={`rounded-xl border ${group.border} bg-white/[0.02]`}>
+            <div className={`px-5 py-2.5 border-b ${group.border} text-[11px] font-mono tracking-wide ${group.color}`}>
               {group.title.toUpperCase()}
             </div>
-            <div className="divide-y divide-ink/10">
+            <div className="divide-y divide-white/6">
               {group.items.map((item) => (
-                <div key={item.name} className="flex justify-between items-center px-6 py-4">
+                <div key={item.name} className="flex justify-between items-center px-5 py-3.5">
                   <div>
-                    <div className="font-medium text-sm">{item.name}</div>
-                    <div className="text-xs text-ink/45 mt-0.5">{item.detail}</div>
+                    <div className="font-medium text-[13px]">{item.name}</div>
+                    <div className="text-[12px] text-white/40 mt-0.5">{item.detail}</div>
                   </div>
-                  <div className="font-mono tabular text-sm">{item.value}</div>
+                  <div className="font-mono text-[13px] text-white/70">{item.value}</div>
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </div>

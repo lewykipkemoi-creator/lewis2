@@ -1,3 +1,5 @@
+import Reveal from "@/components/Reveal";
+
 const channels = [
   { name: "WhatsApp", status: "Connected", detail: "428 conversations this month" },
   { name: "Instagram", status: "Connected", detail: "156 conversations this month" },
@@ -11,30 +13,32 @@ const channels = [
 
 export default function ChannelsPage() {
   return (
-    <div className="max-w-6xl px-8 lg:px-12 py-10">
-      <div className="text-xs font-mono tracking-widest text-ink/40">CHANNELS</div>
-      <h1 className="font-serif text-3xl font-semibold mt-2">Where Lewy is listening.</h1>
-      <p className="text-ink/55 mt-2">Connect a channel once — Lewy handles it forever.</p>
+    <div className="max-w-5xl px-6 lg:px-10 py-8">
+      <Reveal>
+        <div className="text-[11px] font-mono text-white/35 uppercase tracking-wide">Channels</div>
+        <h1 className="text-2xl font-semibold mt-1.5">Where Lewy is listening.</h1>
+        <p className="text-white/45 text-[14px] mt-1.5">Connect a channel once — Lewy handles it forever.</p>
+      </Reveal>
 
-      <div className="grid sm:grid-cols-2 gap-px bg-ink/15 mt-10 max-w-3xl">
+      <Reveal delay={100} className="grid sm:grid-cols-2 gap-3 mt-8 max-w-2xl">
         {channels.map((c) => (
-          <div key={c.name} className="bg-paper p-6 flex items-center justify-between">
+          <div key={c.name} className="rounded-xl border border-white/8 bg-white/[0.02] p-4 flex items-center justify-between">
             <div>
-              <div className="font-serif font-semibold">{c.name}</div>
-              <div className="text-xs text-ink/45 mt-1">{c.detail}</div>
+              <div className="font-medium text-[14px]">{c.name}</div>
+              <div className="text-[12px] text-white/40 mt-0.5">{c.detail}</div>
             </div>
             {c.status === "Connected" ? (
-              <span className="text-[10px] font-mono tracking-wider border border-gain/30 text-gain px-2 py-1 shrink-0">
+              <span className="text-[10px] font-mono border border-emerald-500/25 text-emerald-400 px-2 py-0.5 rounded shrink-0">
                 CONNECTED
               </span>
             ) : (
-              <button className="text-xs font-medium border border-ink/25 px-3 py-1.5 hover:border-ink transition shrink-0">
+              <button className="text-[12px] font-medium border border-white/15 rounded-full px-3 py-1 hover:border-white/30 transition shrink-0">
                 Connect
               </button>
             )}
           </div>
         ))}
-      </div>
+      </Reveal>
     </div>
   );
 }

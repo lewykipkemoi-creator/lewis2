@@ -1,3 +1,5 @@
+import Reveal from "@/components/Reveal";
+
 const files = [
   { name: "Price list — 2026.pdf", type: "PDF", used: "Used in 89 conversations" },
   { name: "Premium package photos.zip", type: "Images", used: "Used in 34 conversations" },
@@ -7,32 +9,34 @@ const files = [
 
 export default function ProductsPage() {
   return (
-    <div className="max-w-6xl px-8 lg:px-12 py-10">
-      <div className="text-xs font-mono tracking-widest text-ink/40">PRODUCTS & MEDIA</div>
-      <h1 className="font-serif text-3xl font-semibold mt-2">What Lewy knows about your business.</h1>
-      <p className="text-ink/55 mt-2 max-w-lg">
-        Upload your catalogue, pricing, policies, images and documents. Lewy
-        uses this — and only this — when answering customers.
-      </p>
+    <div className="max-w-5xl px-6 lg:px-10 py-8">
+      <Reveal>
+        <div className="text-[11px] font-mono text-white/35 uppercase tracking-wide">Products & Media</div>
+        <h1 className="text-2xl font-semibold mt-1.5">What Lewy knows about your business.</h1>
+        <p className="text-white/45 text-[14px] mt-1.5 max-w-md">
+          Upload your catalogue, pricing, policies, images and documents.
+          Lewy uses this — and only this — when answering customers.
+        </p>
+      </Reveal>
 
-      <div className="border-2 border-dashed border-ink/25 mt-10 max-w-2xl p-10 text-center">
-        <div className="font-serif font-semibold">Drop files here, or browse</div>
-        <div className="text-xs text-ink/45 mt-2">PDF, images, video, price lists, FAQs — up to 25MB each</div>
-      </div>
+      <Reveal delay={100} className="border-2 border-dashed border-white/12 rounded-xl mt-8 max-w-lg p-8 text-center hover:border-white/20 transition">
+        <div className="font-medium text-[14px]">Drop files here, or browse</div>
+        <div className="text-[12px] text-white/35 mt-1.5">PDF, images, video, price lists, FAQs — up to 25MB each</div>
+      </Reveal>
 
-      <div className="border border-ink/20 mt-6 max-w-2xl divide-y divide-ink/10">
+      <Reveal delay={150} className="rounded-xl border border-white/8 bg-white/[0.02] mt-4 max-w-lg divide-y divide-white/6">
         {files.map((f) => (
-          <div key={f.name} className="flex items-center justify-between px-6 py-4">
+          <div key={f.name} className="flex items-center justify-between px-5 py-3.5">
             <div>
-              <div className="font-medium text-sm">{f.name}</div>
-              <div className="text-xs text-ink/45 mt-0.5">{f.used}</div>
+              <div className="font-medium text-[13px]">{f.name}</div>
+              <div className="text-[12px] text-white/40 mt-0.5">{f.used}</div>
             </div>
-            <span className="text-[10px] font-mono tracking-wider border border-ink/20 px-2 py-1 text-ink/50">
+            <span className="text-[10px] font-mono border border-white/10 px-2 py-0.5 rounded text-white/40">
               {f.type.toUpperCase()}
             </span>
           </div>
         ))}
-      </div>
+      </Reveal>
     </div>
   );
 }
