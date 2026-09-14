@@ -7,18 +7,19 @@ import { supabase } from "@/lib/supabaseClient";
 import type { Session } from "@supabase/supabase-js";
 import {
   IconOverview, IconInbox, IconLeads, IconCustomers, IconFollowups,
-  IconCalendar, IconProducts, IconChannels, IconSettings, IconMenu, IconX,
+  IconCalendar, IconProducts, IconChannels, IconSettings, IconMenu, IconX, IconTrendUp,
 } from "@/components/icons";
 
 const nav = [
-  { label: "Overview", href: "/dashboard", icon: IconOverview, color: "text-indigo-300" },
-  { label: "Inbox", href: "/dashboard/inbox", icon: IconInbox, color: "text-cyan-300" },
+  { label: "Overview", href: "/dashboard", icon: IconOverview, color: "text-violet-300" },
+  { label: "Conversations", href: "/dashboard/conversations", icon: IconInbox, color: "text-sky-300" },
   { label: "Leads", href: "/dashboard/leads", icon: IconLeads, color: "text-red-300" },
   { label: "Customers", href: "/dashboard/customers", icon: IconCustomers, color: "text-amber-300" },
-  { label: "Follow-ups", href: "/dashboard/followups", icon: IconFollowups, color: "text-emerald-300" },
-  { label: "Calendar", href: "/dashboard/calendar", icon: IconCalendar, color: "text-violet-300" },
-  { label: "Products & Media", href: "/dashboard/products", icon: IconProducts, color: "text-fuchsia-300" },
-  { label: "Channels", href: "/dashboard/channels", icon: IconChannels, color: "text-sky-300" },
+  { label: "Revenue", href: "/dashboard/revenue", icon: IconTrendUp, color: "text-emerald-300" },
+  { label: "Follow-ups", href: "/dashboard/followups", icon: IconFollowups, color: "text-orange-300" },
+  { label: "Calendar", href: "/dashboard/calendar", icon: IconCalendar, color: "text-fuchsia-300" },
+  { label: "Products & Media", href: "/dashboard/products", icon: IconProducts, color: "text-purple-300" },
+  { label: "Channels", href: "/dashboard/channels", icon: IconChannels, color: "text-cyan-300" },
   { label: "Settings", href: "/dashboard/settings", icon: IconSettings, color: "text-white/50" },
 ];
 
@@ -65,7 +66,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <>
       <div className="flex items-center justify-between px-5 h-16 border-b border-white/8">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center font-bold text-sm">L</div>
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center font-bold text-sm">L</div>
           <span className="font-semibold text-sm tracking-tight">Lewy AI</span>
         </Link>
         <button onClick={() => setMobileOpen(false)} className="lg:hidden text-white/50 hover:text-white">
@@ -83,7 +84,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               href={item.href}
               className={`flex items-center gap-3 px-5 py-2.5 text-[13px] border-l-2 transition ${
                 active
-                  ? "border-indigo-400 text-white font-medium bg-white/[0.05]"
+                  ? "border-violet-400 text-white font-medium bg-white/[0.05]"
                   : "border-transparent text-white/50 hover:text-white hover:bg-white/[0.02]"
               }`}
             >
@@ -104,7 +105,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   );
 
   return (
-    <div className="min-h-screen bg-[#08080d] text-white lg:flex">
+    <div className="min-h-screen bg-[#08080d] text-white lg:flex relative overflow-hidden">
+      <div className="fixed top-[-15%] left-[10%] w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="fixed bottom-[-15%] right-[5%] w-[450px] h-[450px] bg-fuchsia-500/8 rounded-full blur-[150px] pointer-events-none" />
+
       <div className="lg:hidden sticky top-0 z-40 h-14 border-b border-white/8 bg-[#08080d]/95 backdrop-blur-xl flex items-center justify-between px-4">
         <button onClick={() => setMobileOpen(true)} className="text-white/70 hover:text-white p-1">
           <IconMenu />
@@ -122,11 +126,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
       )}
 
-      <aside className="hidden lg:flex w-60 shrink-0 border-r border-white/8 flex-col">
+      <aside className="hidden lg:flex w-60 shrink-0 border-r border-white/8 flex-col relative z-10">
         {SidebarContent}
       </aside>
 
-      <div className="flex-1 min-w-0">{children}</div>
+      <div className="flex-1 min-w-0 relative z-10">{children}</div>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function CalendarPage() {
         <p className="text-white/45 text-[14px] mt-1.5">Connected to Google Calendar. Lewy books directly into open slots.</p>
       </Reveal>
 
-      <Reveal delay={100} className="rounded-xl border border-white/8 bg-white/[0.02] mt-8 divide-y divide-white/6 max-w-lg">
+      <Reveal delay={100} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-8 divide-y divide-white/6 max-w-lg">
         {appointments.map((a, i) => (
           <div key={i} className="flex items-center gap-5 px-5 py-3.5">
             <div className="w-16 font-mono text-[12px] text-white/45 shrink-0">{a.time}</div>

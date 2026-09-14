@@ -8,18 +8,18 @@ const conversations = [
   { channel: "Gmail", name: "orders@client.co.ke", snippet: "Following up on our quote from last week", time: "1 day", unread: true, tag: "COLD" },
 ];
 
-export default function InboxPage() {
+export default function ConversationsPage() {
   return (
     <div className="max-w-5xl px-4 sm:px-6 lg:px-10 py-6 lg:py-8">
       <Reveal>
-        <div className="text-[11px] font-mono text-white/35 uppercase tracking-wide">Unified Inbox</div>
+        <div className="text-[11px] font-mono text-white/35 uppercase tracking-wide">Conversations</div>
         <h1 className="text-xl sm:text-2xl font-semibold mt-1.5">Every channel, one place.</h1>
-        <p className="text-white/45 text-[14px] mt-1.5">WhatsApp, Instagram, Facebook, Gmail, Telegram and your website — together.</p>
+        <p className="text-white/45 text-[13px] sm:text-[14px] mt-1.5">WhatsApp, Instagram, Facebook, Gmail, Telegram and your website — together.</p>
       </Reveal>
 
-      <Reveal delay={100} className="rounded-xl border border-white/8 bg-white/[0.02] mt-8 divide-y divide-white/6">
+      <Reveal delay={100} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-8 divide-y divide-white/6">
         {conversations.map((c, i) => (
-          <div key={i} className="flex items-center gap-4 px-5 py-3.5 hover:bg-white/[0.02] cursor-pointer">
+          <div key={i} className="flex items-center gap-4 px-5 py-3.5 hover:bg-white/[0.03] cursor-pointer transition">
             <div className="w-16 shrink-0 text-[11px] text-white/35">{c.channel}</div>
             <div className="flex-1 min-w-0">
               <div className={`text-[13px] ${c.unread ? "font-semibold text-white" : "font-medium text-white/60"}`}>{c.name}</div>

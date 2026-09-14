@@ -9,7 +9,7 @@ export default function CustomersPage() {
         <p className="text-white/45 text-[14px] mt-1.5">Every interaction builds one profile, across every channel.</p>
       </Reveal>
 
-      <Reveal delay={100} className="rounded-xl border border-white/8 bg-white/[0.02] mt-8 max-w-lg">
+      <Reveal delay={100} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-8 max-w-lg">
         <div className="border-b border-white/8 px-5 py-4 flex justify-between items-center">
           <div>
             <div className="font-semibold">Jane Wambui</div>

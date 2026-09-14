@@ -11,7 +11,7 @@ export default function SettingsPage() {
         </p>
       </Reveal>
 
-      <Reveal delay={100} className="rounded-xl border border-white/8 bg-white/[0.02] mt-8 max-w-lg">
+      <Reveal delay={100} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-8 max-w-lg">
         <div className="border-b border-white/8 px-5 py-3 font-medium text-[14px]">Approval thresholds</div>
         <div className="divide-y divide-white/6">
           <div className="px-5 py-3.5 flex justify-between items-center text-[13px]">
@@ -29,7 +29,7 @@ export default function SettingsPage() {
         </div>
       </Reveal>
 
-      <Reveal delay={150} className="rounded-xl border border-white/8 bg-white/[0.02] mt-4 max-w-lg">
+      <Reveal delay={150} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-4 max-w-lg">
         <div className="border-b border-white/8 px-5 py-3 font-medium text-[14px]">Team members</div>
         <div className="divide-y divide-white/6">
           <div className="px-5 py-3.5 flex justify-between items-center text-[13px]">
@@ -43,7 +43,7 @@ export default function SettingsPage() {
         </div>
       </Reveal>
 
-      <Reveal delay={200} className="rounded-xl border border-white/8 bg-white/[0.02] mt-4 max-w-lg">
+      <Reveal delay={200} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-4 max-w-lg">
         <div className="border-b border-white/8 px-5 py-3 font-medium text-[14px]">Notifications</div>
         <div className="divide-y divide-white/6">
           <div className="px-5 py-3.5 flex justify-between items-center text-[13px]">

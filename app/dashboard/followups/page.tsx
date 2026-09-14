@@ -40,7 +40,7 @@ export default function FollowupsPage() {
 
       <div className="space-y-4 mt-8">
         {groups.map((group, gi) => (
-          <Reveal key={group.title} delay={gi * 100} className={`rounded-xl border ${group.border} bg-white/[0.02]`}>
+          <Reveal key={group.title} delay={gi * 100} className={`rounded-2xl border ${group.border} bg-white/[0.02]`}>
             <div className={`px-5 py-2.5 border-b ${group.border} text-[11px] font-mono tracking-wide ${group.color}`}>
               {group.title.toUpperCase()}
             </div>

@@ -40,7 +40,7 @@ export default function LeadsPage() {
 
       <div className="grid md:grid-cols-3 gap-4 mt-8">
         {columns.map((col, ci) => (
-          <Reveal key={col.tag} delay={ci * 100} className={`rounded-xl border ${col.border} bg-white/[0.02]`}>
+          <Reveal key={col.tag} delay={ci * 100} className={`rounded-2xl border ${col.border} bg-white/[0.02]`}>
             <div className={`px-4 py-2.5 border-b ${col.border} text-[11px] font-mono tracking-wide ${col.color} flex justify-between`}>
               <span>{col.tag}</span>
               <span>{col.leads.length}</span>

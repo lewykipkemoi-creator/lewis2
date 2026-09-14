@@ -24,7 +24,7 @@ export default function ProductsPage() {
         <div className="text-[12px] text-white/35 mt-1.5">PDF, images, video, price lists, FAQs — up to 25MB each</div>
       </Reveal>
 
-      <Reveal delay={150} className="rounded-xl border border-white/8 bg-white/[0.02] mt-4 max-w-lg divide-y divide-white/6">
+      <Reveal delay={150} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-4 max-w-lg divide-y divide-white/6">
         {files.map((f) => (
           <div key={f.name} className="flex items-center justify-between px-5 py-3.5">
             <div>

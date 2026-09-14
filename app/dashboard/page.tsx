@@ -4,10 +4,10 @@ import { IconAlertTriangle, IconTrendUp, IconTarget, IconZap, IconClock, IconPer
 const metrics = [
   { label: "Revenue at risk", value: "KES 86,400", tone: "text-red-400", bg: "bg-red-500/10", note: "12 conversations need attention", icon: IconAlertTriangle },
   { label: "Revenue recovered", value: "KES 142,900", tone: "text-emerald-400", bg: "bg-emerald-500/10", note: "This month", icon: IconTrendUp },
-  { label: "Active opportunities", value: "23", tone: "text-indigo-300", bg: "bg-indigo-500/10", note: "Across all channels", icon: IconTarget },
-  { label: "AI resolution rate", value: "81%", tone: "text-cyan-300", bg: "bg-cyan-500/10", note: "Handled without a human", icon: IconZap },
+  { label: "Active opportunities", value: "23", tone: "text-violet-300", bg: "bg-violet-500/10", note: "Across all channels", icon: IconTarget },
+  { label: "AI resolution rate", value: "81%", tone: "text-fuchsia-300", bg: "bg-fuchsia-500/10", note: "Handled without a human", icon: IconZap },
   { label: "Avg. response time", value: "8 sec", tone: "text-emerald-400", bg: "bg-emerald-500/10", note: "vs. industry avg 42 hrs", icon: IconClock },
-  { label: "Conversion rate", value: "16.4%", tone: "text-fuchsia-300", bg: "bg-fuchsia-500/10", note: "Conversation to sale", icon: IconPercent },
+  { label: "Conversion rate", value: "16.4%", tone: "text-purple-300", bg: "bg-purple-500/10", note: "Conversation to sale", icon: IconPercent },
 ];
 
 const funnel = [
@@ -25,10 +25,10 @@ const leaks = [
 ];
 
 const activity = [
-  { text: "Lewy booked an appointment for Jane W. — Thursday, 10:00 AM", time: "2 min ago" },
-  { text: "Lewy sent an M-Pesa payment link to David O. for KES 3,500", time: "18 min ago" },
-  { text: "Lewy escalated a conversation to you — customer asking about a 100-unit order", time: "41 min ago" },
-  { text: "Lewy sent a follow-up to a customer who went quiet after pricing questions", time: "1 hr ago" },
+  { text: "Lewy replied to Jane", channel: "WhatsApp", time: "2 min ago" },
+  { text: "Lewy qualified a new lead", channel: "Website", time: "8 min ago" },
+  { text: "Lewy scheduled a follow-up", channel: "Instagram", time: "14 min ago" },
+  { text: "Lewy escalated a conversation", channel: "WhatsApp", time: "21 min ago" },
 ];
 
 export default function DashboardOverview() {
@@ -46,7 +46,7 @@ export default function DashboardOverview() {
         {metrics.map((m) => {
           const Icon = m.icon;
           return (
-            <div key={m.label} className="rounded-xl border border-white/8 bg-white/[0.02] p-3.5 sm:p-4">
+            <div key={m.label} className="rounded-2xl border border-white/8 bg-gradient-to-b from-white/[0.03] to-transparent p-3.5 sm:p-4 hover:border-white/15 hover:shadow-lg hover:shadow-violet-500/5 transition">
               <div className={`w-8 h-8 rounded-lg ${m.bg} ${m.tone} flex items-center justify-center`}>
                 <Icon />
               </div>
@@ -59,7 +59,7 @@ export default function DashboardOverview() {
       </Reveal>
 
       <div className="grid lg:grid-cols-2 gap-4 sm:gap-5 mt-6">
-        <Reveal delay={150} className="rounded-xl border border-white/8 bg-white/[0.02]">
+        <Reveal delay={150} className="rounded-2xl border border-white/8 bg-white/[0.02]">
           <div className="border-b border-white/8 px-4 sm:px-5 py-3 text-[14px] font-medium">Conversation to revenue</div>
           <div className="p-4 sm:p-5 space-y-3.5">
             {funnel.map((f) => (
@@ -67,7 +67,7 @@ export default function DashboardOverview() {
                 <div className="w-28 sm:w-32 text-[11px] sm:text-[12px] text-white/50 shrink-0">{f.stage}</div>
                 <div className="flex-1 h-1.5 bg-white/8 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-indigo-500 to-cyan-400 rounded-full"
+                    className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full"
                     style={{ width: `${(f.count / funnel[0].count) * 100}%` }}
                   />
                 </div>
@@ -77,7 +77,7 @@ export default function DashboardOverview() {
           </div>
         </Reveal>
 
-        <Reveal delay={200} className="rounded-xl border border-red-500/20 bg-red-500/[0.03]">
+        <Reveal delay={200} className="rounded-2xl border border-red-500/20 bg-gradient-to-b from-red-500/[0.06] to-transparent">
           <div className="border-b border-red-500/15 px-4 sm:px-5 py-3 text-[14px] font-medium flex items-center gap-2">
             <span className="text-red-400"><IconAlertTriangle /></span>
             Revenue Leak Detector
@@ -96,13 +96,16 @@ export default function DashboardOverview() {
         </Reveal>
       </div>
 
-      <Reveal delay={250} className="rounded-xl border border-white/8 bg-white/[0.02] mt-5">
+      <Reveal delay={250} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-5">
         <div className="border-b border-white/8 px-4 sm:px-5 py-3 text-[14px] font-medium">AI activity</div>
         <div className="divide-y divide-white/6">
           {activity.map((a, i) => (
-            <div key={i} className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 px-4 sm:px-5 py-3 text-[13px]">
-              <div className="text-white/60">{a.text}</div>
-              <div className="text-[11px] font-mono text-white/30 shrink-0 sm:ml-4">{a.time}</div>
+            <div key={i} className="flex justify-between items-center px-4 sm:px-5 py-3 text-[13px]">
+              <div>
+                <div className="text-white/80">{a.text}</div>
+                <div className="text-[11px] text-white/35 mt-0.5">{a.channel}</div>
+              </div>
+              <div className="text-[11px] font-mono text-white/30 shrink-0 ml-4">{a.time}</div>
             </div>
           ))}
         </div>
