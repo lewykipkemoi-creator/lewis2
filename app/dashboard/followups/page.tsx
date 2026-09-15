@@ -44,7 +44,7 @@ export default function FollowupsPage() {
             <div className={`px-5 py-2.5 border-b ${group.border} text-[11px] font-mono tracking-wide ${group.color}`}>
               {group.title.toUpperCase()}
             </div>
-            <div className="divide-y divide-white/6">
+            <div className="divide-y divide-transparent">
               {group.items.map((item) => (
                 <div key={item.name} className="flex justify-between items-center px-5 py-3.5">
                   <div>

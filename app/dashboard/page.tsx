@@ -60,7 +60,7 @@ export default function DashboardOverview() {
               >
                 Run AI scan
               </button>
-              <a href="/dashboard/conversations" className="border border-white/15 rounded-xl px-5 py-2.5 text-[13px] font-medium text-white/70 hover:bg-white/5 transition">
+              <a href="/dashboard/conversations" className="border border-transparent rounded-xl px-5 py-2.5 text-[13px] font-medium text-white/70 hover:bg-white/5 transition">
                 Open inbox →
               </a>
             </div>
@@ -76,7 +76,7 @@ export default function DashboardOverview() {
         {metrics.map((m) => {
           const Icon = m.icon;
           return (
-            <div key={m.label} className="rounded-2xl border border-white/8 bg-white/[0.02] p-4 hover:border-indigo-500/25 hover:-translate-y-1 transition">
+            <div key={m.label} className="rounded-2xl border border-transparent bg-white/[0.02] p-4 hover:border-indigo-500/25 hover:-translate-y-1 transition">
               <div className="flex justify-between items-start">
                 <div className="text-[11px] sm:text-[12px] text-white/45">{m.label}</div>
                 <div className={`w-8 h-8 rounded-lg ${m.bg} ${m.iconTone} flex items-center justify-center shrink-0`}>
@@ -91,7 +91,7 @@ export default function DashboardOverview() {
       </Reveal>
 
       <div className="grid lg:grid-cols-[1.5fr_1fr] gap-4 sm:gap-5 mt-5">
-        <Reveal delay={150} className="rounded-2xl border border-white/8 bg-white/[0.02] p-5">
+        <Reveal delay={150} className="rounded-2xl border border-transparent bg-white/[0.02] p-5">
           <div className="flex justify-between items-center mb-5">
             <div>
               <div className="text-[14px] font-semibold">Revenue performance</div>
@@ -121,7 +121,7 @@ export default function DashboardOverview() {
             <div className="h-full w-[72%] origin-left bg-gradient-to-r from-amber-400 to-red-500 rounded-full animate-pulseBar" />
           </div>
 
-          <div className="mt-4 divide-y divide-white/6">
+          <div className="mt-4 divide-y divide-transparent">
             {opportunities.map((o) => (
               <div key={o.name} className="flex items-center gap-3 py-2.5">
                 <div className="w-8 h-8 rounded-lg bg-white/8 flex items-center justify-center text-[10px] font-bold shrink-0">{o.code}</div>
@@ -134,20 +134,20 @@ export default function DashboardOverview() {
             ))}
           </div>
 
-          <a href="/dashboard/leads" className="block text-center text-[12px] border border-white/12 rounded-lg py-2 mt-4 hover:bg-white/5 transition">
+          <a href="/dashboard/leads" className="block text-center text-[12px] border border-transparent rounded-lg py-2 mt-4 hover:bg-white/5 transition">
             View all opportunities →
           </a>
         </Reveal>
       </div>
 
       <div className="grid lg:grid-cols-[1.5fr_1fr] gap-4 sm:gap-5 mt-5">
-        <Reveal delay={250} className="rounded-2xl border border-white/8 bg-white/[0.02] p-5">
+        <Reveal delay={250} className="rounded-2xl border border-transparent bg-white/[0.02] p-5">
           <div className="flex justify-between items-center mb-4">
             <div>
               <div className="text-[14px] font-semibold">Priority leads</div>
               <div className="text-[11px] text-white/35 mt-0.5">Customers most likely to buy</div>
             </div>
-            <a href="/dashboard/leads" className="text-[11px] border border-white/12 rounded-lg px-3 py-1.5 hover:bg-white/5 transition">View all</a>
+            <a href="/dashboard/leads" className="text-[11px] border border-transparent rounded-lg px-3 py-1.5 hover:bg-white/5 transition">View all</a>
           </div>
           <div className="overflow-x-auto -mx-1">
             <table className="w-full min-w-[420px]">
@@ -161,7 +161,7 @@ export default function DashboardOverview() {
               </thead>
               <tbody>
                 {priorityLeads.map((lead) => (
-                  <tr key={lead.name} className="border-t border-white/6 text-[12px]">
+                  <tr key={lead.name} className="border-t border-transparent text-[12px]">
                     <td className="py-2.5 px-1">
                       <div className="flex items-center gap-2.5">
                         <div className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-[10px] font-bold shrink-0">{lead.initials}</div>
@@ -180,7 +180,7 @@ export default function DashboardOverview() {
           </div>
         </Reveal>
 
-        <Reveal delay={300} className="rounded-2xl border border-white/8 bg-white/[0.02] p-5">
+        <Reveal delay={300} className="rounded-2xl border border-transparent bg-white/[0.02] p-5">
           <div className="flex justify-between items-center mb-4">
             <div>
               <div className="text-[14px] font-semibold">Lewy activity</div>

@@ -95,13 +95,13 @@ export default function ConversationsPage() {
         </div>
       </Reveal>
 
-      <Reveal delay={100} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-6 overflow-hidden grid md:grid-cols-[280px_1fr] h-[560px]">
-        <div className="border-b md:border-b-0 md:border-r border-white/8 overflow-y-auto">
+      <Reveal delay={100} className="rounded-2xl border border-transparent bg-white/[0.02] mt-6 overflow-hidden grid md:grid-cols-[280px_1fr] h-[560px]">
+        <div className="border-b md:border-b-0 md:border-r border-transparent overflow-y-auto">
           {threads.map((c, i) => (
             <button
               key={c.name}
               onClick={() => setSelected(i)}
-              className={`w-full text-left flex items-center gap-3 px-4 py-3.5 border-b border-white/6 transition ${
+              className={`w-full text-left flex items-center gap-3 px-4 py-3.5 border-b border-transparent transition ${
                 selected === i ? "bg-indigo-500/10" : "hover:bg-white/[0.03]"
               }`}
             >
@@ -118,7 +118,7 @@ export default function ConversationsPage() {
         </div>
 
         <div className="flex flex-col min-h-0">
-          <div className="flex items-center gap-3 px-5 py-3.5 border-b border-white/8">
+          <div className="flex items-center gap-3 px-5 py-3.5 border-b border-transparent">
             <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-[11px] font-bold">
               {active.initials}
             </div>
@@ -135,7 +135,7 @@ export default function ConversationsPage() {
                   className={`max-w-[75%] rounded-2xl px-4 py-2.5 text-[13px] leading-6 ${
                     m.from === "ai"
                       ? "bg-gradient-to-br from-indigo-600/80 to-cyan-600/60 rounded-br-md"
-                      : "bg-white/[0.06] border border-white/8 rounded-bl-md"
+                      : "bg-white/[0.06] border border-transparent rounded-bl-md"
                   }`}
                 >
                   {m.text}
@@ -144,13 +144,13 @@ export default function ConversationsPage() {
             ))}
           </div>
 
-          <div className="flex gap-2 px-4 py-3 border-t border-white/8">
+          <div className="flex gap-2 px-4 py-3 border-t border-transparent">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               placeholder="Write a message..."
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-[13px] outline-none focus:border-indigo-400/50 placeholder:text-white/25"
+              className="flex-1 bg-white/5 border border-transparent rounded-xl px-3.5 py-2.5 text-[13px] outline-none focus:border-indigo-400/50 placeholder:text-white/25"
             />
             <button
               onClick={sendMessage}

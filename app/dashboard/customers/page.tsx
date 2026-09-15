@@ -22,11 +22,11 @@ export default function CustomersPage() {
         </div>
       </Reveal>
 
-      <Reveal delay={100} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-8 overflow-hidden">
+      <Reveal delay={100} className="rounded-2xl border border-transparent bg-white/[0.02] mt-8 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[560px]">
             <thead>
-              <tr className="text-white/35 text-[10px] uppercase tracking-wide border-b border-white/8">
+              <tr className="text-white/35 text-[10px] uppercase tracking-wide border-b border-transparent">
                 <th className="text-left font-medium py-3 px-5">Customer</th>
                 <th className="text-left font-medium py-3 px-5">Last interaction</th>
                 <th className="text-left font-medium py-3 px-5">Channel</th>
@@ -37,7 +37,7 @@ export default function CustomersPage() {
             </thead>
             <tbody>
               {customers.map((c) => (
-                <tr key={c.name} className="border-b border-white/6 last:border-0 text-[13px]">
+                <tr key={c.name} className="border-b border-transparent last:border-0 text-[13px]">
                   <td className="py-3.5 px-5">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-[10px] font-bold shrink-0">
@@ -55,7 +55,7 @@ export default function CustomersPage() {
                   <td className="py-3.5 px-5">
                     <button
                       onClick={() => showToast(`Opening ${c.name}`)}
-                      className="text-[11px] border border-white/12 rounded-lg px-3 py-1.5 hover:bg-white/5 transition whitespace-nowrap"
+                      className="text-[11px] border border-transparent rounded-lg px-3 py-1.5 hover:bg-white/5 transition whitespace-nowrap"
                     >
                       View
                     </button>

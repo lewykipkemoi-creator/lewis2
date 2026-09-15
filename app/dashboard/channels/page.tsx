@@ -22,7 +22,7 @@ export default function ChannelsPage() {
 
       <Reveal delay={100} className="grid sm:grid-cols-2 gap-3 mt-8 max-w-2xl">
         {channels.map((c) => (
-          <div key={c.name} className="rounded-2xl border border-white/8 bg-white/[0.02] p-4 flex items-center justify-between">
+          <div key={c.name} className="rounded-2xl border border-transparent bg-white/[0.02] p-4 flex items-center justify-between">
             <div>
               <div className="font-medium text-[14px]">{c.name}</div>
               <div className="text-[12px] text-white/40 mt-0.5">{c.detail}</div>
@@ -32,7 +32,7 @@ export default function ChannelsPage() {
                 CONNECTED
               </span>
             ) : (
-              <button className="text-[12px] font-medium border border-white/15 rounded-full px-3 py-1 hover:border-white/30 transition shrink-0">
+              <button className="text-[12px] font-medium border border-transparent rounded-full px-3 py-1 hover:border-transparent transition shrink-0">
                 Connect
               </button>
             )}

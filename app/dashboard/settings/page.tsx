@@ -51,12 +51,12 @@ export default function SettingsPage() {
           ))}
         </div>
 
-        <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-5">
+        <div className="rounded-2xl border border-transparent bg-white/[0.02] p-5">
           {tab === "AI behavior" ? (
             <>
               <div className="text-[14px] font-semibold">AI behavior</div>
               <div className="text-[11px] text-white/35 mt-1">Configure how Lewy communicates with customers.</div>
-              <div className="divide-y divide-white/6 mt-4">
+              <div className="divide-y divide-transparent mt-4">
                 {toggles.map((t) => (
                   <div key={t.key} className="flex items-center justify-between py-3.5">
                     <div>

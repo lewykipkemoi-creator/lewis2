@@ -32,7 +32,7 @@ export default function RevenuePage() {
 
       <Reveal delay={100} className="grid sm:grid-cols-3 gap-3 mt-8">
         {summary.map((s) => (
-          <div key={s.label} className="rounded-2xl border border-white/8 bg-gradient-to-b from-white/[0.03] to-transparent p-4">
+          <div key={s.label} className="rounded-2xl border border-transparent bg-gradient-to-b from-white/[0.03] to-transparent p-4">
             <div className="text-[12px] text-white/40">{s.label}</div>
             <div className={`text-xl font-semibold mt-1.5 ${s.tone}`}>{s.value}</div>
             <div className="text-[11px] text-white/30 mt-1">{s.note}</div>
@@ -41,8 +41,8 @@ export default function RevenuePage() {
       </Reveal>
 
       <div className="grid lg:grid-cols-2 gap-4 sm:gap-5 mt-6">
-        <Reveal delay={150} className="rounded-2xl border border-white/8 bg-white/[0.02]">
-          <div className="border-b border-white/8 px-5 py-3 text-[14px] font-medium">Revenue by channel</div>
+        <Reveal delay={150} className="rounded-2xl border border-transparent bg-white/[0.02]">
+          <div className="border-b border-transparent px-5 py-3 text-[14px] font-medium">Revenue by channel</div>
           <div className="p-5 space-y-3.5">
             {byChannel.map((c) => (
               <div key={c.channel} className="flex items-center gap-3">
@@ -61,7 +61,7 @@ export default function RevenuePage() {
             <span className="text-indigo-300"><IconPercent /></span>
             Business intelligence
           </div>
-          <div className="divide-y divide-white/6">
+          <div className="divide-y divide-transparent">
             {insights.map((insight, i) => (
               <div key={i} className="px-5 py-3.5 text-[13px] text-white/70 leading-6">{insight}</div>
             ))}

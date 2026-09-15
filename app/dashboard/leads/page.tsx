@@ -22,7 +22,7 @@ const columns = [
   {
     tag: "COLD",
     color: "text-white/40",
-    border: "border-white/10",
+    border: "border-transparent",
     leads: [
       { initials: "IG", name: "Instagram DM", interest: "General inquiry", value: "KES 2,000", summary: "Asked one question, no reply since.", next: "Low priority — automated nudge only" },
     ],
@@ -44,7 +44,7 @@ export default function LeadsPage() {
               <span>{col.tag}</span>
               <span>{col.leads.length}</span>
             </div>
-            <div className="divide-y divide-white/6">
+            <div className="divide-y divide-transparent">
               {col.leads.map((lead) => (
                 <div key={lead.name} className="p-4">
                   <div className="flex items-center gap-2.5">
@@ -58,7 +58,7 @@ export default function LeadsPage() {
                     <div className="font-mono text-[13px] text-white/70 shrink-0">{lead.value}</div>
                   </div>
                   <p className="text-[12px] text-white/40 leading-5 mt-3">{lead.summary}</p>
-                  <div className="text-[12px] mt-2.5 pt-2.5 border-t border-white/6">
+                  <div className="text-[12px] mt-2.5 pt-2.5 border-t border-transparent">
                     <span className="text-white/50">Next: </span>
                     <span className="text-white/70">{lead.next}</span>
                   </div>

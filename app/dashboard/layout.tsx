@@ -47,7 +47,7 @@ function QuickActionModal({ open, onClose }: { open: boolean; onClose: () => voi
           <select
             value={action}
             onChange={(e) => setAction(e.target.value)}
-            className="w-full mt-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-indigo-400/50"
+            className="w-full mt-1.5 bg-white/5 border border-transparent rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-indigo-400/50"
           >
             <option>Send WhatsApp message</option>
             <option>Create follow-up</option>
@@ -61,7 +61,7 @@ function QuickActionModal({ open, onClose }: { open: boolean; onClose: () => voi
             value={customer}
             onChange={(e) => setCustomer(e.target.value)}
             placeholder="Customer name"
-            className="w-full mt-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-indigo-400/50 placeholder:text-white/25"
+            className="w-full mt-1.5 bg-white/5 border border-transparent rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-indigo-400/50 placeholder:text-white/25"
           />
         </div>
         <div>
@@ -70,11 +70,11 @@ function QuickActionModal({ open, onClose }: { open: boolean; onClose: () => voi
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="What should Lewy do?"
-            className="w-full mt-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-indigo-400/50 placeholder:text-white/25"
+            className="w-full mt-1.5 bg-white/5 border border-transparent rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-indigo-400/50 placeholder:text-white/25"
           />
         </div>
         <div className="flex justify-end gap-2 pt-1">
-          <button onClick={onClose} className="text-[13px] border border-white/12 rounded-lg px-4 py-2 hover:bg-white/5 transition">
+          <button onClick={onClose} className="text-[13px] border border-transparent rounded-lg px-4 py-2 hover:bg-white/5 transition">
             Cancel
           </button>
           <button onClick={handleCreate} className="text-[13px] bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-lg px-4 py-2 font-medium hover:opacity-90 transition">
@@ -162,7 +162,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
         </button>
       </div>
 
-      <div className="mx-3 mb-4 rounded-2xl border border-white/8 bg-gradient-to-br from-indigo-500/[0.13] to-white/[0.02] p-3.5">
+      <div className="mx-3 mb-4 rounded-2xl border border-transparent bg-gradient-to-br from-indigo-500/[0.13] to-white/[0.02] p-3.5">
         <div className="text-[10px] text-white/40 tracking-wide">WORKSPACE</div>
         <div className="font-semibold text-[13px] mt-1">Amina&apos;s Salon</div>
         <div className="flex items-center gap-1.5 mt-2.5 text-[11px] text-emerald-300">
@@ -178,8 +178,8 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
         {integrationItems.map((item) => <NavLink key={item.href} item={item} />)}
       </div>
 
-      <div className="p-3 border-t border-white/8">
-        <div className="flex items-center gap-2.5 rounded-xl border border-white/8 p-2.5">
+      <div className="p-3 border-t border-transparent">
+        <div className="flex items-center gap-2.5 rounded-xl border border-transparent p-2.5">
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center font-bold text-[11px] shrink-0">
             {session.user.email?.slice(0, 2).toUpperCase()}
           </div>
@@ -202,18 +202,18 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-black/60" onClick={() => setMobileOpen(false)} />
-          <aside className="absolute left-0 top-0 bottom-0 w-72 bg-[#0a0a10] border-r border-white/8 flex flex-col">
+          <aside className="absolute left-0 top-0 bottom-0 w-72 bg-[#0a0a10] border-r border-transparent flex flex-col">
             {SidebarContent}
           </aside>
         </div>
       )}
 
-      <aside className="hidden lg:flex w-64 shrink-0 border-r border-white/8 flex-col relative z-10 bg-black/20">
+      <aside className="hidden lg:flex w-64 shrink-0 border-r border-transparent flex-col relative z-10 bg-black/20">
         {SidebarContent}
       </aside>
 
       <div className="flex-1 min-w-0 relative z-10 flex flex-col">
-        <header className="h-16 border-b border-white/8 flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30 bg-[#07070c]/85 backdrop-blur-xl">
+        <header className="h-16 border-b border-transparent flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30 bg-[#07070c]/85 backdrop-blur-xl">
           <div className="flex items-center gap-3 min-w-0">
             <button onClick={() => setMobileOpen(true)} className="lg:hidden text-white/60 hover:text-white p-1 shrink-0">
               <IconMenu />
@@ -225,13 +225,13 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="hidden md:flex items-center gap-2 bg-white/[0.03] border border-white/8 rounded-lg px-3 py-2 text-white/35 w-52">
+            <div className="hidden md:flex items-center gap-2 bg-white/[0.03] border border-transparent rounded-lg px-3 py-2 text-white/35 w-52">
               <IconSearch />
               <input placeholder="Search anything..." className="bg-transparent outline-none text-[13px] w-full placeholder:text-white/30" />
             </div>
             <button
               onClick={() => showToast("You have 3 important notifications")}
-              className="w-9 h-9 rounded-lg border border-white/8 bg-white/[0.03] text-white/60 hover:text-white hover:-translate-y-0.5 transition flex items-center justify-center"
+              className="w-9 h-9 rounded-lg border border-transparent bg-white/[0.03] text-white/60 hover:text-white hover:-translate-y-0.5 transition flex items-center justify-center"
             >
               <IconBell />
             </button>

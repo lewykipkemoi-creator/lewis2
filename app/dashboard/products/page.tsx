@@ -19,19 +19,19 @@ export default function ProductsPage() {
         </p>
       </Reveal>
 
-      <Reveal delay={100} className="border-2 border-dashed border-white/12 rounded-xl mt-8 max-w-lg p-8 text-center hover:border-white/20 transition">
+      <Reveal delay={100} className="border-2 border-dashed border-transparent rounded-xl mt-8 max-w-lg p-8 text-center hover:border-transparent transition">
         <div className="font-medium text-[14px]">Drop files here, or browse</div>
         <div className="text-[12px] text-white/35 mt-1.5">PDF, images, video, price lists, FAQs — up to 25MB each</div>
       </Reveal>
 
-      <Reveal delay={150} className="rounded-2xl border border-white/8 bg-white/[0.02] mt-4 max-w-lg divide-y divide-white/6">
+      <Reveal delay={150} className="rounded-2xl border border-transparent bg-white/[0.02] mt-4 max-w-lg divide-y divide-transparent">
         {files.map((f) => (
           <div key={f.name} className="flex items-center justify-between px-5 py-3.5">
             <div>
               <div className="font-medium text-[13px]">{f.name}</div>
               <div className="text-[12px] text-white/40 mt-0.5">{f.used}</div>
             </div>
-            <span className="text-[10px] font-mono border border-white/10 px-2 py-0.5 rounded text-white/40">
+            <span className="text-[10px] font-mono border border-transparent px-2 py-0.5 rounded text-white/40">
               {f.type.toUpperCase()}
             </span>
           </div>
