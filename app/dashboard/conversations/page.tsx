@@ -102,10 +102,10 @@ export default function ConversationsPage() {
               key={c.name}
               onClick={() => setSelected(i)}
               className={`w-full text-left flex items-center gap-3 px-4 py-3.5 border-b border-white/6 transition ${
-                selected === i ? "bg-violet-500/10" : "hover:bg-white/[0.03]"
+                selected === i ? "bg-indigo-500/10" : "hover:bg-white/[0.03]"
               }`}
             >
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center text-[11px] font-bold shrink-0">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-[11px] font-bold shrink-0">
                 {c.initials}
               </div>
               <div className="min-w-0 flex-1">
@@ -119,7 +119,7 @@ export default function ConversationsPage() {
 
         <div className="flex flex-col min-h-0">
           <div className="flex items-center gap-3 px-5 py-3.5 border-b border-white/8">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center text-[11px] font-bold">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-[11px] font-bold">
               {active.initials}
             </div>
             <div>
@@ -134,7 +134,7 @@ export default function ConversationsPage() {
                 <div
                   className={`max-w-[75%] rounded-2xl px-4 py-2.5 text-[13px] leading-6 ${
                     m.from === "ai"
-                      ? "bg-gradient-to-br from-violet-600/80 to-fuchsia-600/60 rounded-br-md"
+                      ? "bg-gradient-to-br from-indigo-600/80 to-cyan-600/60 rounded-br-md"
                       : "bg-white/[0.06] border border-white/8 rounded-bl-md"
                   }`}
                 >
@@ -150,11 +150,11 @@ export default function ConversationsPage() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               placeholder="Write a message..."
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-[13px] outline-none focus:border-violet-400/50 placeholder:text-white/25"
+              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-[13px] outline-none focus:border-indigo-400/50 placeholder:text-white/25"
             />
             <button
               onClick={sendMessage}
-              className="bg-gradient-to-r from-violet-500 to-violet-700 rounded-xl px-4 py-2.5 text-[13px] font-medium hover:opacity-90 transition"
+              className="bg-gradient-to-r from-indigo-500 to-indigo-700 rounded-xl px-4 py-2.5 text-[13px] font-medium hover:opacity-90 transition"
             >
               Send
             </button>

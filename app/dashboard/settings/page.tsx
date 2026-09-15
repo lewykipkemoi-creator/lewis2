@@ -65,7 +65,7 @@ export default function SettingsPage() {
                     </div>
                     <button
                       onClick={() => toggle(t.key)}
-                      className={`w-11 h-6 rounded-full p-0.5 transition shrink-0 ${t.on ? "bg-violet-600" : "bg-white/15"}`}
+                      className={`w-11 h-6 rounded-full p-0.5 transition shrink-0 ${t.on ? "bg-indigo-600" : "bg-white/15"}`}
                     >
                       <span
                         className={`block w-5 h-5 rounded-full bg-white transition-transform ${t.on ? "translate-x-5" : "translate-x-0"}`}

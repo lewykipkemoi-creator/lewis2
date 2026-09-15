@@ -40,7 +40,7 @@ export default function CustomersPage() {
                 <tr key={c.name} className="border-b border-white/6 last:border-0 text-[13px]">
                   <td className="py-3.5 px-5">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center text-[10px] font-bold shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-[10px] font-bold shrink-0">
                         {c.initials}
                       </div>
                       <span className="whitespace-nowrap">{c.name}</span>

@@ -19,7 +19,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     <ToastContext.Provider value={{ showToast }}>
       {children}
       <div
-        className={`fixed right-4 bottom-4 sm:right-5 sm:bottom-5 z-[200] rounded-xl border border-white/10 border-l-2 border-l-violet-500 bg-[#171720] px-4 py-3 text-[13px] shadow-2xl transition-all duration-300 max-w-[calc(100vw-2rem)] ${
+        className={`fixed right-4 bottom-4 sm:right-5 sm:bottom-5 z-[200] rounded-xl border border-white/10 border-l-2 border-l-indigo-500 bg-[#171720] px-4 py-3 text-[13px] shadow-2xl transition-all duration-300 max-w-[calc(100vw-2rem)] ${
           message ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0 pointer-events-none"
         }`}
       >

@@ -48,7 +48,7 @@ export default function RevenuePage() {
               <div key={c.channel} className="flex items-center gap-3">
                 <div className="w-20 text-[12px] text-white/50 shrink-0">{c.channel}</div>
                 <div className="flex-1 h-1.5 bg-white/8 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full" style={{ width: `${c.share}%` }} />
+                  <div className="h-full bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-full" style={{ width: `${c.share}%` }} />
                 </div>
                 <div className="w-20 text-right font-mono text-[12px] text-white/60">KES {c.revenue.toLocaleString()}</div>
               </div>
@@ -56,9 +56,9 @@ export default function RevenuePage() {
           </div>
         </Reveal>
 
-        <Reveal delay={200} className="rounded-2xl border border-violet-500/20 bg-gradient-to-b from-violet-500/[0.06] to-transparent">
-          <div className="border-b border-violet-500/15 px-5 py-3 text-[14px] font-medium flex items-center gap-2">
-            <span className="text-violet-300"><IconPercent /></span>
+        <Reveal delay={200} className="rounded-2xl border border-indigo-500/20 bg-gradient-to-b from-indigo-500/[0.06] to-transparent">
+          <div className="border-b border-indigo-500/15 px-5 py-3 text-[14px] font-medium flex items-center gap-2">
+            <span className="text-indigo-300"><IconPercent /></span>
             Business intelligence
           </div>
           <div className="divide-y divide-white/6">

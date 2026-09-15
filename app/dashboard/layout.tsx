@@ -14,14 +14,14 @@ import { ToastProvider, useToast } from "@/components/Toast";
 import Modal from "@/components/Modal";
 
 const nav = [
-  { label: "Overview", subtitle: "Revenue command center", href: "/dashboard", icon: IconOverview, color: "text-violet-300", section: "main" },
+  { label: "Overview", subtitle: "Revenue command center", href: "/dashboard", icon: IconOverview, color: "text-indigo-300", section: "main" },
   { label: "Conversations", subtitle: "Unified customer inbox", href: "/dashboard/conversations", icon: IconInbox, color: "text-sky-300", section: "main", badge: 8 },
   { label: "Customers", subtitle: "Customer relationship intelligence", href: "/dashboard/customers", icon: IconCustomers, color: "text-amber-300", section: "main" },
   { label: "Leads", subtitle: "AI-powered lead intelligence", href: "/dashboard/leads", icon: IconLeads, color: "text-red-300", section: "main", badge: 5 },
   { label: "Products & Media", subtitle: "Business knowledge", href: "/dashboard/products", icon: IconProducts, color: "text-purple-300", section: "main" },
   { label: "Revenue", subtitle: "Revenue intelligence", href: "/dashboard/revenue", icon: IconTrendUp, color: "text-emerald-300", section: "main" },
   { label: "Follow-ups", subtitle: "Automated lead recovery", href: "/dashboard/followups", icon: IconFollowups, color: "text-orange-300", section: "main" },
-  { label: "Calendar", subtitle: "Appointments and bookings", href: "/dashboard/calendar", icon: IconCalendar, color: "text-fuchsia-300", section: "main" },
+  { label: "Calendar", subtitle: "Appointments and bookings", href: "/dashboard/calendar", icon: IconCalendar, color: "text-cyan-300", section: "main" },
   { label: "Channels", subtitle: "Connected communication channels", href: "/dashboard/channels", icon: IconChannels, color: "text-cyan-300", section: "integrations" },
   { label: "Settings", subtitle: "Workspace configuration", href: "/dashboard/settings", icon: IconSettings, color: "text-white/50", section: "integrations" },
 ];
@@ -47,7 +47,7 @@ function QuickActionModal({ open, onClose }: { open: boolean; onClose: () => voi
           <select
             value={action}
             onChange={(e) => setAction(e.target.value)}
-            className="w-full mt-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-violet-400/50"
+            className="w-full mt-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-indigo-400/50"
           >
             <option>Send WhatsApp message</option>
             <option>Create follow-up</option>
@@ -61,7 +61,7 @@ function QuickActionModal({ open, onClose }: { open: boolean; onClose: () => voi
             value={customer}
             onChange={(e) => setCustomer(e.target.value)}
             placeholder="Customer name"
-            className="w-full mt-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-violet-400/50 placeholder:text-white/25"
+            className="w-full mt-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-indigo-400/50 placeholder:text-white/25"
           />
         </div>
         <div>
@@ -70,14 +70,14 @@ function QuickActionModal({ open, onClose }: { open: boolean; onClose: () => voi
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="What should Lewy do?"
-            className="w-full mt-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-violet-400/50 placeholder:text-white/25"
+            className="w-full mt-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-[13px] outline-none focus:border-indigo-400/50 placeholder:text-white/25"
           />
         </div>
         <div className="flex justify-end gap-2 pt-1">
           <button onClick={onClose} className="text-[13px] border border-white/12 rounded-lg px-4 py-2 hover:bg-white/5 transition">
             Cancel
           </button>
-          <button onClick={handleCreate} className="text-[13px] bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg px-4 py-2 font-medium hover:opacity-90 transition">
+          <button onClick={handleCreate} className="text-[13px] bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-lg px-4 py-2 font-medium hover:opacity-90 transition">
             Create action
           </button>
         </div>
@@ -137,14 +137,14 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
         href={item.href}
         className={`flex items-center gap-3 px-4 py-2.5 mx-1.5 my-0.5 rounded-xl text-[13px] transition ${
           active
-            ? "text-white bg-gradient-to-r from-violet-500/25 to-violet-500/5 border border-violet-400/25"
+            ? "text-white bg-gradient-to-r from-indigo-500/25 to-indigo-500/5 border border-indigo-400/25"
             : "text-white/55 hover:text-white hover:bg-white/[0.04] hover:translate-x-0.5"
         }`}
       >
         <span className={active ? item.color : "text-white/35"}><Icon /></span>
         <span className="flex-1">{item.label}</span>
         {item.badge ? (
-          <span className="bg-violet-600 text-[10px] px-1.5 py-0.5 rounded-full leading-none">{item.badge}</span>
+          <span className="bg-indigo-600 text-[10px] px-1.5 py-0.5 rounded-full leading-none">{item.badge}</span>
         ) : null}
       </Link>
     );
@@ -154,7 +154,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
     <>
       <div className="flex items-center justify-between px-4 h-16">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center font-black text-[15px] shadow-lg shadow-violet-500/30">L</div>
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center font-black text-[15px] shadow-lg shadow-indigo-500/30">L</div>
           <span className="font-bold text-[15px] tracking-tight">Lewy AI</span>
         </Link>
         <button onClick={() => setMobileOpen(false)} className="lg:hidden text-white/50 hover:text-white">
@@ -162,7 +162,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
         </button>
       </div>
 
-      <div className="mx-3 mb-4 rounded-2xl border border-white/8 bg-gradient-to-br from-violet-500/[0.13] to-white/[0.02] p-3.5">
+      <div className="mx-3 mb-4 rounded-2xl border border-white/8 bg-gradient-to-br from-indigo-500/[0.13] to-white/[0.02] p-3.5">
         <div className="text-[10px] text-white/40 tracking-wide">WORKSPACE</div>
         <div className="font-semibold text-[13px] mt-1">Amina&apos;s Salon</div>
         <div className="flex items-center gap-1.5 mt-2.5 text-[11px] text-emerald-300">
@@ -180,7 +180,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
 
       <div className="p-3 border-t border-white/8">
         <div className="flex items-center gap-2.5 rounded-xl border border-white/8 p-2.5">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-600 to-fuchsia-500 flex items-center justify-center font-bold text-[11px] shrink-0">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center font-bold text-[11px] shrink-0">
             {session.user.email?.slice(0, 2).toUpperCase()}
           </div>
           <div className="min-w-0 flex-1">
@@ -196,8 +196,8 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-[#07070c] text-white lg:flex relative overflow-hidden">
-      <div className="fixed top-[-15%] left-[10%] w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="fixed bottom-[-15%] right-[5%] w-[450px] h-[450px] bg-fuchsia-500/8 rounded-full blur-[150px] pointer-events-none" />
+      <div className="fixed top-[-15%] left-[10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="fixed bottom-[-15%] right-[5%] w-[450px] h-[450px] bg-cyan-500/8 rounded-full blur-[150px] pointer-events-none" />
 
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
@@ -237,7 +237,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
             </button>
             <button
               onClick={() => setQuickOpen(true)}
-              className="flex items-center gap-1.5 bg-gradient-to-r from-violet-500 to-violet-700 rounded-lg px-3 sm:px-4 py-2 text-[13px] font-medium shadow-lg shadow-violet-600/25 hover:-translate-y-0.5 transition"
+              className="flex items-center gap-1.5 bg-gradient-to-r from-indigo-500 to-indigo-700 rounded-lg px-3 sm:px-4 py-2 text-[13px] font-medium shadow-lg shadow-indigo-600/25 hover:-translate-y-0.5 transition"
             >
               <IconPlus />
               <span className="hidden sm:inline">Quick action</span>
