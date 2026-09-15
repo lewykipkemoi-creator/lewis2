@@ -31,12 +31,17 @@ const config: Config = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        pulseBar: {
+          "0%, 100%": { transform: "scaleX(0.93)" },
+          "50%": { transform: "scaleX(1)" },
+        },
       },
       animation: {
         fadeUp: "fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         float: "float 7s ease-in-out infinite",
         floatSlow: "float 10s ease-in-out infinite",
         marquee: "marquee 30s linear infinite",
+        pulseBar: "pulseBar 2s ease-in-out infinite",
       },
     },
   },
