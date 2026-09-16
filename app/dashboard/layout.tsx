@@ -120,7 +120,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
   }
 
   if (!checked) {
-    return <div className="min-h-screen bg-[#07070c] flex items-center justify-center text-white/30 text-sm">Loading…</div>;
+    return <div className="min-h-screen bg-[#101018] flex items-center justify-center text-white/30 text-sm">Loading…</div>;
   }
 
   if (!session) return null;
@@ -195,7 +195,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <div className="min-h-screen bg-[#07070c] text-white lg:flex relative overflow-hidden">
+    <div className="min-h-screen bg-[#101018] text-white lg:flex relative overflow-hidden">
       <div className="fixed top-[-15%] left-[10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
       <div className="fixed bottom-[-15%] right-[5%] w-[450px] h-[450px] bg-cyan-500/8 rounded-full blur-[150px] pointer-events-none" />
 
@@ -213,7 +213,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
       </aside>
 
       <div className="flex-1 min-w-0 relative z-10 flex flex-col">
-        <header className="h-16 border-b border-transparent flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30 bg-[#07070c]/85 backdrop-blur-xl">
+        <header className="h-16 border-b border-transparent flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30 bg-[#101018]/85 backdrop-blur-xl">
           <div className="flex items-center gap-3 min-w-0">
             <button onClick={() => setMobileOpen(true)} className="lg:hidden text-white/60 hover:text-white p-1 shrink-0">
               <IconMenu />
