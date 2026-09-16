@@ -76,7 +76,7 @@ export default function DashboardOverview() {
         {metrics.map((m) => {
           const Icon = m.icon;
           return (
-            <div key={m.label} className="rounded-2xl border border-transparent bg-white/[0.02] p-4 hover:border-indigo-500/25 hover:-translate-y-1 transition">
+            <div key={m.label} className="rounded-2xl border border-transparent bg-[#15151f] shadow-lg shadow-black/20 p-4 hover:border-indigo-500/25 hover:-translate-y-1 transition">
               <div className="flex justify-between items-start">
                 <div className="text-[11px] sm:text-[12px] text-white/45">{m.label}</div>
                 <div className={`w-8 h-8 rounded-lg ${m.bg} ${m.iconTone} flex items-center justify-center shrink-0`}>
@@ -91,7 +91,7 @@ export default function DashboardOverview() {
       </Reveal>
 
       <div className="grid lg:grid-cols-[1.5fr_1fr] gap-4 sm:gap-5 mt-5">
-        <Reveal delay={150} className="rounded-2xl border border-transparent bg-white/[0.02] p-5">
+        <Reveal delay={150} className="rounded-2xl border border-transparent bg-[#15151f] shadow-lg shadow-black/20 p-5">
           <div className="flex justify-between items-center mb-5">
             <div>
               <div className="text-[14px] font-semibold">Revenue performance</div>
@@ -141,7 +141,7 @@ export default function DashboardOverview() {
       </div>
 
       <div className="grid lg:grid-cols-[1.5fr_1fr] gap-4 sm:gap-5 mt-5">
-        <Reveal delay={250} className="rounded-2xl border border-transparent bg-white/[0.02] p-5">
+        <Reveal delay={250} className="rounded-2xl border border-transparent bg-[#15151f] shadow-lg shadow-black/20 p-5">
           <div className="flex justify-between items-center mb-4">
             <div>
               <div className="text-[14px] font-semibold">Priority leads</div>
@@ -180,7 +180,7 @@ export default function DashboardOverview() {
           </div>
         </Reveal>
 
-        <Reveal delay={300} className="rounded-2xl border border-transparent bg-white/[0.02] p-5">
+        <Reveal delay={300} className="rounded-2xl border border-transparent bg-[#15151f] shadow-lg shadow-black/20 p-5">
           <div className="flex justify-between items-center mb-4">
             <div>
               <div className="text-[14px] font-semibold">Lewy activity</div>
@@ -190,7 +190,7 @@ export default function DashboardOverview() {
           </div>
           <div className="space-y-1">
             {activity.map((a, i) => (
-              <div key={i} className="flex gap-2.5 rounded-lg p-2 hover:bg-white/[0.03] transition">
+              <div key={i} className="flex gap-2.5 rounded-lg p-2 hover:bg-white/[0.05] transition">
                 <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center text-[10px] font-bold shrink-0">L</div>
                 <div className="min-w-0">
                   <div className="text-[12px] font-medium">{a.title}</div>

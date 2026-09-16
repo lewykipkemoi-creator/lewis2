@@ -226,13 +226,13 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="hidden md:flex items-center gap-2 bg-white/[0.03] border border-transparent rounded-lg px-3 py-2 text-white/35 w-52">
+            <div className="hidden md:flex items-center gap-2 bg-white/[0.05] border border-transparent rounded-lg px-3 py-2 text-white/35 w-52">
               <IconSearch />
               <input placeholder="Search anything..." className="bg-transparent outline-none text-[13px] w-full placeholder:text-white/30" />
             </div>
             <button
               onClick={() => showToast("You have 3 important notifications")}
-              className="w-9 h-9 rounded-lg border border-transparent bg-white/[0.03] text-white/60 hover:text-white hover:-translate-y-0.5 transition flex items-center justify-center"
+              className="w-9 h-9 rounded-lg border border-transparent bg-white/[0.05] text-white/60 hover:text-white hover:-translate-y-0.5 transition flex items-center justify-center"
             >
               <IconBell />
             </button>

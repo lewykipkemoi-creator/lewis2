@@ -40,7 +40,7 @@ export default function RevenuePage() {
         {summary.map((s) => {
           const Icon = s.icon;
           return (
-            <div key={s.label} className="rounded-2xl bg-white/[0.02] p-4">
+            <div key={s.label} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 p-4">
               <div className={`w-8 h-8 rounded-lg ${s.bg} ${s.tone} flex items-center justify-center`}>
                 <Icon />
               </div>
@@ -53,7 +53,7 @@ export default function RevenuePage() {
       </Reveal>
 
       <div className="grid lg:grid-cols-2 gap-4 sm:gap-5 mt-5">
-        <Reveal delay={130} className="rounded-2xl bg-white/[0.02] p-5">
+        <Reveal delay={130} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 p-5">
           <div className="text-[14px] font-semibold mb-4">Revenue by channel</div>
           <div className="space-y-3.5">
             {byChannel.map((c) => (
@@ -75,13 +75,13 @@ export default function RevenuePage() {
           </div>
           <div className="space-y-3 mt-3">
             {insights.map((insight, i) => (
-              <div key={i} className="text-[13px] text-white/70 leading-6 bg-white/[0.02] rounded-lg px-3.5 py-2.5">{insight}</div>
+              <div key={i} className="text-[13px] text-white/70 leading-6 bg-[#15151f] shadow-lg shadow-black/20 rounded-lg px-3.5 py-2.5">{insight}</div>
             ))}
           </div>
         </Reveal>
       </div>
 
-      <Reveal delay={230} className="rounded-2xl bg-white/[0.02] mt-5">
+      <Reveal delay={230} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 mt-5">
         <div className="px-5 py-3.5 text-[14px] font-semibold">Top customers by revenue</div>
         <div className="divide-y divide-transparent">
           {topCustomers.map((c) => (

@@ -69,7 +69,7 @@ export default function CalendarPage() {
             className={`rounded-xl py-3 flex flex-col items-center gap-1.5 transition ${
               selectedDay === i
                 ? "bg-gradient-to-br from-indigo-500/25 to-cyan-500/10 border border-indigo-400/30"
-                : "bg-white/[0.02] hover:bg-white/[0.04]"
+                : "bg-[#15151f] shadow-lg shadow-black/20 hover:bg-white/[0.04]"
             }`}
           >
             <div className="text-[10px] text-white/40 uppercase">{d.day}</div>
@@ -91,7 +91,7 @@ export default function CalendarPage() {
         {stats.map((s) => {
           const Icon = s.icon;
           return (
-            <div key={s.label} className="rounded-2xl bg-white/[0.02] p-4">
+            <div key={s.label} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 p-4">
               <div className={`w-8 h-8 rounded-lg ${s.bg} ${s.tone} flex items-center justify-center`}>
                 <Icon />
               </div>
@@ -102,11 +102,11 @@ export default function CalendarPage() {
         })}
       </Reveal>
 
-      <Reveal delay={160} className="rounded-2xl bg-white/[0.02] mt-5">
+      <Reveal delay={160} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 mt-5">
         <div className="px-5 py-3.5 text-[14px] font-semibold">Today's schedule</div>
         <div className="divide-y divide-transparent">
           {todayAppointments.map((a, i) => (
-            <div key={i} className="flex items-center gap-4 px-5 py-3.5 hover:bg-white/[0.02] transition">
+            <div key={i} className="flex items-center gap-4 px-5 py-3.5 hover:bg-[#15151f] shadow-lg shadow-black/20 transition">
               <div className="w-16 font-mono text-[12px] text-white/45 shrink-0">{a.time}</div>
               <div
                 className={`w-9 h-9 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 ${
@@ -127,7 +127,7 @@ export default function CalendarPage() {
         </div>
       </Reveal>
 
-      <Reveal delay={200} className="rounded-2xl bg-white/[0.02] mt-5">
+      <Reveal delay={200} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 mt-5">
         <div className="px-5 py-3.5 text-[14px] font-semibold">Coming up this week</div>
         <div className="divide-y divide-transparent">
           {upcoming.map((a, i) => (

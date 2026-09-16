@@ -54,7 +54,7 @@ export default function FollowupsPage() {
         {stats.map((s) => {
           const Icon = s.icon;
           return (
-            <div key={s.label} className="rounded-2xl bg-white/[0.02] p-4">
+            <div key={s.label} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 p-4">
               <div className={`w-8 h-8 rounded-lg ${s.bg} ${s.tone} flex items-center justify-center`}>
                 <Icon />
               </div>
@@ -67,7 +67,7 @@ export default function FollowupsPage() {
 
       <div className="space-y-4 mt-5">
         {groups.map((group, gi) => (
-          <Reveal key={group.title} delay={120 + gi * 80} className="rounded-2xl bg-white/[0.02]">
+          <Reveal key={group.title} delay={120 + gi * 80} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20">
             <div className="px-5 py-3 flex items-center justify-between">
               <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${group.pill}`}>{group.title.toUpperCase()}</span>
             </div>

@@ -50,7 +50,7 @@ export default function LeadsPage() {
         {stats.map((s) => {
           const Icon = s.icon;
           return (
-            <div key={s.label} className="rounded-2xl bg-white/[0.02] p-4">
+            <div key={s.label} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 p-4">
               <div className={`w-8 h-8 rounded-lg ${s.bg} ${s.tone} flex items-center justify-center`}>
                 <Icon />
               </div>
@@ -64,7 +64,7 @@ export default function LeadsPage() {
 
       <div className="grid md:grid-cols-3 gap-4 mt-5">
         {columns.map((col, ci) => (
-          <Reveal key={col.tag} delay={120 + ci * 80} className="rounded-2xl bg-white/[0.02]">
+          <Reveal key={col.tag} delay={120 + ci * 80} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20">
             <div className="px-4 py-3 flex justify-between items-center">
               <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${col.pill}`}>{col.tag}</span>
               <span className="text-[12px] text-white/40">{col.leads.length} leads</span>
@@ -83,7 +83,7 @@ export default function LeadsPage() {
                     <div className="font-mono text-[13px] text-white/70 shrink-0">{lead.value}</div>
                   </div>
                   <p className="text-[12px] text-white/40 leading-5 mt-3">{lead.summary}</p>
-                  <div className="text-[12px] mt-3 pt-3 border-t border-transparent bg-white/[0.02] rounded-lg px-2.5 py-2">
+                  <div className="text-[12px] mt-3 pt-3 border-t border-transparent bg-[#15151f] shadow-lg shadow-black/20 rounded-lg px-2.5 py-2">
                     <span className="text-white/45">Next: </span>
                     <span className="text-white/75">{lead.next}</span>
                   </div>

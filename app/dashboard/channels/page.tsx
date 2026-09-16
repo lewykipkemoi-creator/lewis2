@@ -23,7 +23,7 @@ export default function ChannelsPage() {
 
       <Reveal delay={100} className="grid sm:grid-cols-2 gap-3 mt-8 max-w-2xl">
         {channels.map((c) => (
-          <div key={c.name} className="rounded-2xl border border-transparent bg-white/[0.02] p-4 flex items-center gap-3.5">
+          <div key={c.name} className="rounded-2xl border border-transparent bg-[#15151f] shadow-lg shadow-black/20 p-4 flex items-center gap-3.5">
             <ChannelIcon name={c.name} />
             <div className="min-w-0 flex-1">
               <div className="font-medium text-[14px] truncate">{c.name}</div>

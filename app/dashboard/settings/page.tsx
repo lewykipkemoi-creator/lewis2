@@ -43,7 +43,7 @@ export default function SettingsPage() {
               key={t}
               onClick={() => setTab(t)}
               className={`text-left px-3.5 py-2.5 rounded-xl text-[13px] whitespace-nowrap transition ${
-                tab === t ? "bg-white/8 text-white" : "text-white/45 hover:text-white hover:bg-white/[0.03]"
+                tab === t ? "bg-white/8 text-white" : "text-white/45 hover:text-white hover:bg-white/[0.05]"
               }`}
             >
               {t}
@@ -51,7 +51,7 @@ export default function SettingsPage() {
           ))}
         </div>
 
-        <div className="rounded-2xl border border-transparent bg-white/[0.02] p-5">
+        <div className="rounded-2xl border border-transparent bg-[#15151f] shadow-lg shadow-black/20 p-5">
           {tab === "AI behavior" ? (
             <>
               <div className="text-[14px] font-semibold">AI behavior</div>

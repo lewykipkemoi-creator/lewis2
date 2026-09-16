@@ -39,7 +39,7 @@ export default function ProductsPage() {
 
       <Reveal delay={100} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {products.map((p) => (
-          <div key={p.name} className="rounded-2xl bg-white/[0.02] overflow-hidden hover:-translate-y-1 transition">
+          <div key={p.name} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 overflow-hidden hover:-translate-y-1 transition">
             <div className={`h-28 bg-gradient-to-br ${p.grad} flex items-center justify-center text-4xl`}>
               {p.emoji}
             </div>
@@ -67,7 +67,7 @@ export default function ProductsPage() {
           <div className="text-[12px] text-white/35 mt-1.5">PDF, images, video, price lists, FAQs — up to 25MB each</div>
         </div>
 
-        <div className="rounded-2xl bg-white/[0.02] mt-4 divide-y divide-transparent">
+        <div className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 mt-4 divide-y divide-transparent">
           {files.map((f) => (
             <div key={f.name} className="flex items-center justify-between px-5 py-3.5">
               <div>

@@ -35,7 +35,7 @@ export default function CustomersPage() {
         {stats.map((s) => {
           const Icon = s.icon;
           return (
-            <div key={s.label} className="rounded-2xl bg-white/[0.02] p-4">
+            <div key={s.label} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 p-4">
               <div className={`w-8 h-8 rounded-lg ${s.bg} ${s.tone} flex items-center justify-center`}>
                 <Icon />
               </div>
@@ -46,7 +46,7 @@ export default function CustomersPage() {
         })}
       </Reveal>
 
-      <Reveal delay={150} className="rounded-2xl bg-white/[0.02] mt-5 overflow-hidden">
+      <Reveal delay={150} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 mt-5 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[560px]">
             <thead>
@@ -61,7 +61,7 @@ export default function CustomersPage() {
             </thead>
             <tbody>
               {customers.map((c) => (
-                <tr key={c.name} className="text-[13px] hover:bg-white/[0.02] transition">
+                <tr key={c.name} className="text-[13px] hover:bg-[#15151f] shadow-lg shadow-black/20 transition">
                   <td className="py-3.5 px-5">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-[10px] font-bold shrink-0">

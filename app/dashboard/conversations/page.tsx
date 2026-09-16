@@ -95,14 +95,14 @@ export default function ConversationsPage() {
         </div>
       </Reveal>
 
-      <Reveal delay={100} className="rounded-2xl border border-transparent bg-white/[0.02] mt-6 overflow-hidden grid md:grid-cols-[280px_1fr] h-[560px]">
+      <Reveal delay={100} className="rounded-2xl border border-transparent bg-[#15151f] shadow-lg shadow-black/20 mt-6 overflow-hidden grid md:grid-cols-[280px_1fr] h-[560px]">
         <div className="border-b md:border-b-0 md:border-r border-transparent overflow-y-auto">
           {threads.map((c, i) => (
             <button
               key={c.name}
               onClick={() => setSelected(i)}
               className={`w-full text-left flex items-center gap-3 px-4 py-3.5 border-b border-transparent transition ${
-                selected === i ? "bg-indigo-500/10" : "hover:bg-white/[0.03]"
+                selected === i ? "bg-indigo-500/10" : "hover:bg-white/[0.05]"
               }`}
             >
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-[11px] font-bold shrink-0">
