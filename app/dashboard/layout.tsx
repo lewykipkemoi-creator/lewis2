@@ -195,9 +195,10 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <div className="min-h-screen bg-[#101018] text-white lg:flex relative overflow-hidden">
-      <div className="fixed top-[-15%] left-[10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="fixed bottom-[-15%] right-[5%] w-[450px] h-[450px] bg-cyan-500/8 rounded-full blur-[150px] pointer-events-none" />
+    <div className="min-h-screen bg-[radial-gradient(circle_at_15%_0%,rgba(99,102,241,0.16),transparent_45%),radial-gradient(circle_at_85%_100%,rgba(34,211,238,0.12),transparent_45%),#101018] text-white lg:flex relative overflow-hidden">
+      <div className="fixed top-[-15%] left-[10%] w-[550px] h-[550px] bg-indigo-600/18 rounded-full blur-[150px] pointer-events-none" />
+      <div className="fixed bottom-[-15%] right-[5%] w-[500px] h-[500px] bg-cyan-500/14 rounded-full blur-[150px] pointer-events-none" />
+      <div className="fixed top-[40%] right-[25%] w-[350px] h-[350px] bg-indigo-500/8 rounded-full blur-[140px] pointer-events-none" />
 
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
