@@ -18,7 +18,7 @@ const nav = [
   { label: "Conversations", subtitle: "Unified customer inbox", href: "/dashboard/conversations", icon: IconInbox, color: "text-sky-300", section: "main", badge: 8 },
   { label: "Customers", subtitle: "Customer relationship intelligence", href: "/dashboard/customers", icon: IconCustomers, color: "text-amber-300", section: "main" },
   { label: "Leads", subtitle: "AI-powered lead intelligence", href: "/dashboard/leads", icon: IconLeads, color: "text-red-300", section: "main", badge: 5 },
-  { label: "Products & Media", subtitle: "Business knowledge", href: "/dashboard/products", icon: IconProducts, color: "text-purple-300", section: "main" },
+  { label: "Business Knowledge", subtitle: "What Lewy uses to answer customers", href: "/dashboard/knowledge", icon: IconProducts, color: "text-purple-300", section: "main" },
   { label: "Revenue", subtitle: "Revenue intelligence", href: "/dashboard/revenue", icon: IconTrendUp, color: "text-emerald-300", section: "main" },
   { label: "Follow-ups", subtitle: "Automated lead recovery", href: "/dashboard/followups", icon: IconFollowups, color: "text-orange-300", section: "main" },
   { label: "Calendar", subtitle: "Appointments and bookings", href: "/dashboard/calendar", icon: IconCalendar, color: "text-cyan-300", section: "main" },
