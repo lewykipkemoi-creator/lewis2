@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import { ChannelIcon } from "@/components/ChannelIcon";
 
 const channels = [
   { name: "WhatsApp", status: "Connected", detail: "428 conversations this month" },
@@ -22,17 +23,18 @@ export default function ChannelsPage() {
 
       <Reveal delay={100} className="grid sm:grid-cols-2 gap-3 mt-8 max-w-2xl">
         {channels.map((c) => (
-          <div key={c.name} className="rounded-2xl border border-transparent bg-white/[0.02] p-4 flex items-center justify-between">
-            <div>
-              <div className="font-medium text-[14px]">{c.name}</div>
-              <div className="text-[12px] text-white/40 mt-0.5">{c.detail}</div>
+          <div key={c.name} className="rounded-2xl border border-transparent bg-white/[0.02] p-4 flex items-center gap-3.5">
+            <ChannelIcon name={c.name} />
+            <div className="min-w-0 flex-1">
+              <div className="font-medium text-[14px] truncate">{c.name}</div>
+              <div className="text-[12px] text-white/40 mt-0.5 truncate">{c.detail}</div>
             </div>
             {c.status === "Connected" ? (
               <span className="text-[10px] font-mono border border-emerald-500/25 text-emerald-400 px-2 py-0.5 rounded shrink-0">
                 CONNECTED
               </span>
             ) : (
-              <button className="text-[12px] font-medium border border-transparent rounded-full px-3 py-1 hover:border-transparent transition shrink-0">
+              <button className="text-[12px] font-medium bg-white/8 hover:bg-white/15 rounded-full px-3 py-1 transition shrink-0">
                 Connect
               </button>
             )}
