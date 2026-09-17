@@ -30,13 +30,19 @@ export async function POST(req: Request) {
     const { customerMessage, businessContext } = await req.json();
 
     if (!customerMessage || typeof customerMessage !== "string") {
-      return NextResponse.json({ error: "customerMessage is required" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Please write a message first." },
+        { status: 400 }
+      );
     }
 
     const reply = await generateReply(businessContext || DEMO_BUSINESS_CONTEXT, customerMessage);
     return NextResponse.json({ reply });
-  } catch (err: any) {
-    console.error("generate-reply error:", err);
-    return NextResponse.json({ error: err.message || "Failed to generate reply" }, { status: 500 });
+  } catch (err) {
+    console.error("generate-reply route error:", err);
+    return NextResponse.json(
+      { error: "Lewy couldn't generate a reply right now. Please try again in a moment." },
+      { status: 500 }
+    );
   }
 }
