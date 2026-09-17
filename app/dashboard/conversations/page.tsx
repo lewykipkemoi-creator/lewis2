@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
+import { useToast } from "@/components/Toast";
 
 type Message = { from: "customer" | "ai"; text: string };
 
@@ -27,37 +28,36 @@ const conversations = [
     time: "8m",
     messages: [
       { from: "customer", text: "Can I book for tomorrow?" },
-      { from: "ai", text: "Yes! I have an opening at 2:30 PM tomorrow — shall I reserve it for you?" },
     ] as Message[],
   },
   {
     initials: "DK",
     name: "David Kimani",
     channel: "Email",
-    preview: "Send me the catalogue please.",
+    preview: "Do you deliver to Nakuru?",
     time: "21m",
     messages: [
-      { from: "customer", text: "Send me the catalogue please." },
-      { from: "ai", text: "Sure thing — attaching our latest catalogue now." },
+      { from: "customer", text: "Do you deliver to Nakuru?" },
     ] as Message[],
   },
   {
     initials: "JM",
     name: "James Mutua",
     channel: "Website",
-    preview: "Do you deliver to Nakuru?",
+    preview: "What time are you open on Sunday?",
     time: "1h",
     messages: [
-      { from: "customer", text: "Do you deliver to Nakuru?" },
-      { from: "ai", text: "Yes, we deliver to Nakuru within 2-3 business days." },
+      { from: "customer", text: "What time are you open on Sunday?" },
     ] as Message[],
   },
 ];
 
 export default function ConversationsPage() {
+  const { showToast } = useToast();
   const [selected, setSelected] = useState(0);
   const [threads, setThreads] = useState(conversations);
   const [input, setInput] = useState("");
+  const [loadingSuggestion, setLoadingSuggestion] = useState(false);
 
   const active = threads[selected];
 
@@ -71,17 +71,32 @@ export default function ConversationsPage() {
       return next;
     });
     setInput("");
+  }
 
-    setTimeout(() => {
-      setThreads((prev) => {
-        const next = [...prev];
-        next[selected] = {
-          ...next[selected],
-          messages: [...next[selected].messages, { from: "customer", text: "Got it, thank you!" }],
-        };
-        return next;
+  async function suggestReply() {
+    const lastCustomerMessage = [...active.messages].reverse().find((m) => m.from === "customer");
+    if (!lastCustomerMessage) {
+      showToast("No customer message to reply to yet");
+      return;
+    }
+
+    setLoadingSuggestion(true);
+    try {
+      const res = await fetch("/api/generate-reply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ customerMessage: lastCustomerMessage.text }),
       });
-    }, 900);
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || "Failed to generate reply");
+
+      setInput(data.reply);
+    } catch (err: any) {
+      showToast(err.message || "Couldn't generate a reply");
+    } finally {
+      setLoadingSuggestion(false);
+    }
   }
 
   return (
@@ -95,14 +110,14 @@ export default function ConversationsPage() {
         </div>
       </Reveal>
 
-      <Reveal delay={100} className="rounded-2xl border border-transparent bg-[#15151f] shadow-lg shadow-black/20 mt-6 overflow-hidden grid md:grid-cols-[280px_1fr] h-[560px]">
-        <div className="border-b md:border-b-0 md:border-r border-transparent overflow-y-auto">
+      <Reveal delay={100} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 mt-6 overflow-hidden grid md:grid-cols-[280px_1fr] h-[560px]">
+        <div className="overflow-y-auto">
           {threads.map((c, i) => (
             <button
               key={c.name}
               onClick={() => setSelected(i)}
-              className={`w-full text-left flex items-center gap-3 px-4 py-3.5 border-b border-transparent transition ${
-                selected === i ? "bg-indigo-500/10" : "hover:bg-white/[0.05]"
+              className={`w-full text-left flex items-center gap-3 px-4 py-3.5 transition ${
+                selected === i ? "bg-indigo-500/10" : "hover:bg-white/[0.04]"
               }`}
             >
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-[11px] font-bold shrink-0">
@@ -118,7 +133,7 @@ export default function ConversationsPage() {
         </div>
 
         <div className="flex flex-col min-h-0">
-          <div className="flex items-center gap-3 px-5 py-3.5 border-b border-transparent">
+          <div className="flex items-center gap-3 px-5 py-3.5">
             <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-[11px] font-bold">
               {active.initials}
             </div>
@@ -135,7 +150,7 @@ export default function ConversationsPage() {
                   className={`max-w-[75%] rounded-2xl px-4 py-2.5 text-[13px] leading-6 ${
                     m.from === "ai"
                       ? "bg-gradient-to-br from-indigo-600/80 to-cyan-600/60 rounded-br-md"
-                      : "bg-white/[0.06] border border-transparent rounded-bl-md"
+                      : "bg-white/8 rounded-bl-md"
                   }`}
                 >
                   {m.text}
@@ -144,13 +159,23 @@ export default function ConversationsPage() {
             ))}
           </div>
 
-          <div className="flex gap-2 px-4 py-3 border-t border-transparent">
+          <div className="px-4 pb-2">
+            <button
+              onClick={suggestReply}
+              disabled={loadingSuggestion}
+              className="text-[12px] bg-white/8 hover:bg-white/15 disabled:opacity-50 rounded-lg px-3 py-1.5 transition"
+            >
+              {loadingSuggestion ? "Thinking…" : "✨ Suggest reply with Lewy"}
+            </button>
+          </div>
+
+          <div className="flex gap-2 px-4 py-3">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-              placeholder="Write a message..."
-              className="flex-1 bg-white/5 border border-transparent rounded-xl px-3.5 py-2.5 text-[13px] outline-none focus:border-indigo-400/50 placeholder:text-white/25"
+              placeholder="Write a message, or ask Lewy to suggest one..."
+              className="flex-1 bg-white/5 rounded-xl px-3.5 py-2.5 text-[13px] outline-none focus:bg-white/8 placeholder:text-white/25"
             />
             <button
               onClick={sendMessage}
