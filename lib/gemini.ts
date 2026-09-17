@@ -1,5 +1,5 @@
 const GEMINI_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent";
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent";
 
 export async function generateReply(businessContext: string, customerMessage: string) {
   const apiKey = process.env.GEMINI_API_KEY;
@@ -20,9 +20,12 @@ Reply as Lewy:`;
 
   let res: Response;
   try {
-    res = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
+    res = await fetch(GEMINI_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": apiKey,
+      },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
       }),
@@ -34,7 +37,7 @@ Reply as Lewy:`;
 
   if (!res.ok) {
     const errText = await res.text();
-    console.error(`Gemini API error (${res.status}):`, errText);
+    console.error(`Gemini API error (${res.status}) on ${GEMINI_URL}:`, errText);
     throw new Error("AI reply is temporarily unavailable");
   }
 
