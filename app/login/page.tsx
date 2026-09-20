@@ -32,13 +32,14 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
     if (error) {
       setError(error.message);
       return;
     }
-    router.push("/dashboard");
+    const onboarded = data.user?.user_metadata?.onboarded;
+    router.push(onboarded ? "/dashboard" : "/onboarding");
   }
 
   return (
