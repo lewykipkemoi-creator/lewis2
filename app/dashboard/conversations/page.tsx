@@ -60,6 +60,7 @@ export default function ConversationsPage() {
 
   useEffect(() => {
     supabase.auth.getSession().then(async ({ data }) => {
+      if (!data.session) return;
       const workspace = await getOrCreateWorkspace(data.session.user.id);
       setWorkspaceId(workspace.id);
       const answers: KnowledgeAnswers = { ...emptyKnowledge, ...(workspace.knowledge_answers || {}) };
