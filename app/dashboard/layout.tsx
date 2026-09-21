@@ -8,7 +8,7 @@ import type { Session } from "@supabase/supabase-js";
 import {
   IconOverview, IconInbox, IconLeads, IconCustomers, IconFollowups,
   IconCalendar, IconProducts, IconChannels, IconSettings, IconMenu, IconX,
-  IconTrendUp, IconSearch, IconBell, IconPlus,
+  IconTrendUp, IconSearch, IconBell, IconPlus, IconWand,
 } from "@/components/icons";
 import { ToastProvider, useToast } from "@/components/Toast";
 import Modal from "@/components/Modal";
@@ -19,6 +19,7 @@ const nav = [
   { label: "Customers", subtitle: "Customer relationship intelligence", href: "/dashboard/customers", icon: IconCustomers, color: "text-amber-300", section: "main" },
   { label: "Leads", subtitle: "AI-powered lead intelligence", href: "/dashboard/leads", icon: IconLeads, color: "text-red-300", section: "main", badge: 5 },
   { label: "Business Knowledge", subtitle: "What Lewy uses to answer customers", href: "/dashboard/knowledge", icon: IconProducts, color: "text-purple-300", section: "main" },
+  { label: "Train Lewy", subtitle: "Test and correct Lewy's answers", href: "/dashboard/train", icon: IconWand, color: "text-pink-300", section: "main" },
   { label: "Revenue", subtitle: "Revenue intelligence", href: "/dashboard/revenue", icon: IconTrendUp, color: "text-emerald-300", section: "main" },
   { label: "Follow-ups", subtitle: "Automated lead recovery", href: "/dashboard/followups", icon: IconFollowups, color: "text-orange-300", section: "main" },
   { label: "Calendar", subtitle: "Appointments and bookings", href: "/dashboard/calendar", icon: IconCalendar, color: "text-cyan-300", section: "main" },

@@ -157,6 +157,37 @@ export default function KnowledgePage() {
         </p>
       </Reveal>
 
+      {(answers.businessName || answers.description || products.length > 0 || answers.faqs.length > 0) && (
+        <Reveal delay={40} className="rounded-2xl bg-gradient-to-br from-indigo-500/[0.08] to-transparent p-5 mt-6">
+          <div className="text-[13px] font-semibold text-indigo-300">What Lewy currently knows</div>
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mt-3 text-[13px] text-white/70">
+            {answers.businessName && (
+              <div><span className="text-white/40">Business:</span> {answers.businessName}</div>
+            )}
+            {answers.bizType && (
+              <div><span className="text-white/40">Offers:</span> {answers.bizType}</div>
+            )}
+            {answers.hours && (
+              <div><span className="text-white/40">Hours:</span> {answers.hours}</div>
+            )}
+            {answers.serviceAreas && (
+              <div><span className="text-white/40">Area:</span> {answers.serviceAreas}</div>
+            )}
+            <div><span className="text-white/40">Services listed:</span> {answers.services.length}</div>
+            <div><span className="text-white/40">Products listed:</span> {products.length}</div>
+            <div><span className="text-white/40">FAQs taught:</span> {answers.faqs.length}</div>
+          </div>
+          {answers.description && (
+            <p className="text-[13px] text-white/50 leading-6 mt-3 border-t border-white/8 pt-3">
+              {answers.description}
+            </p>
+          )}
+          <a href="/dashboard/train" className="inline-flex text-[12px] text-indigo-300 hover:text-indigo-200 mt-3">
+            Try Lewy with this knowledge →
+          </a>
+        </Reveal>
+      )}
+
       <Reveal delay={80} className="rounded-2xl bg-[#15151f] shadow-lg shadow-black/20 p-5 mt-6">
         <div className="text-[13px] font-medium">What does your business offer?</div>
         <div className="flex flex-wrap gap-2 mt-3">

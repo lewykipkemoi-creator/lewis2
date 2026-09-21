@@ -61,3 +61,6 @@ export const IconPlus = () => (
 export const IconCheck = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
 );
+export const IconWand = () => (
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="m15 4 1.5 1.5M20 9l-9 9-4-4 9-9 4 4Z"/><path d="M4 20l4-1 1-4"/><path d="M17 3v2M22 8h-2M19 5h2M19 5l-1.5 1.5"/></svg>
+);
