@@ -52,7 +52,7 @@ export default function HandoverPage() {
     try {
       await resolveHandover(id);
       setRows((prev) => prev.filter((r) => r.id !== id));
-      showToast(\`You're now handling \${name}'s conversation — open it in Conversations\`);
+      showToast(`You're now handling ${name}'s conversation — open it in Conversations`);
     } catch {
       showToast("Couldn't update — try again");
     }
@@ -97,7 +97,7 @@ export default function HandoverPage() {
                       <div className="text-[11px] text-white/40">{row.channel}</div>
                     </div>
                   </div>
-                  <span className={\`inline-block text-[10px] font-bold px-2.5 py-1 rounded-full mt-3 \${reasonStyle(row.escalation_reason)}\`}>
+                  <span className={`inline-block text-[10px] font-bold px-2.5 py-1 rounded-full mt-3 ${reasonStyle(row.escalation_reason)}`}>
                     {reasonLabels[row.escalation_reason]}
                   </span>
                   {row.opportunity_value && (
