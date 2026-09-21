@@ -8,7 +8,7 @@ import type { Session } from "@supabase/supabase-js";
 import {
   IconOverview, IconInbox, IconLeads, IconCustomers, IconFollowups,
   IconCalendar, IconProducts, IconChannels, IconSettings, IconMenu, IconX,
-  IconTrendUp, IconSearch, IconBell, IconPlus, IconWand,
+  IconTrendUp, IconSearch, IconBell, IconPlus, IconWand, IconAlertTriangle,
 } from "@/components/icons";
 import { ToastProvider, useToast } from "@/components/Toast";
 import Modal from "@/components/Modal";
