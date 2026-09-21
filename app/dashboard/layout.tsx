@@ -15,6 +15,7 @@ import Modal from "@/components/Modal";
 
 const nav = [
   { label: "Overview", subtitle: "Revenue command center", href: "/dashboard", icon: IconOverview, color: "text-indigo-300", section: "main" },
+  { label: "Human Takeover", subtitle: "Conversations that need you", href: "/dashboard/handover", icon: IconAlertTriangle, color: "text-red-300", section: "main" },
   { label: "Conversations", subtitle: "Unified customer inbox", href: "/dashboard/conversations", icon: IconInbox, color: "text-sky-300", section: "main", badge: 8 },
   { label: "Customers", subtitle: "Customer relationship intelligence", href: "/dashboard/customers", icon: IconCustomers, color: "text-amber-300", section: "main" },
   { label: "Leads", subtitle: "AI-powered lead intelligence", href: "/dashboard/leads", icon: IconLeads, color: "text-red-300", section: "main", badge: 5 },
@@ -95,6 +96,9 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
   const [checked, setChecked] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [quickOpen, setQuickOpen] = useState(false);
+  const [workspaceId, setWorkspaceId] = useState<string | null>(null);
+  const [aiActive, setAiActive] = useState(true);
+  const [handoverCount, setHandoverCount] = useState(0);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -113,7 +117,20 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMobileOpen(false);
-  }, [pathname]);
+    if (workspaceId) {
+      getPendingHandoverCount(workspaceId).then(setHandoverCount).catch(() => {});
+    }
+  }, [pathname, workspaceId]);
+
+  async function handleToggleAi() {
+    setAiActive(next);
+    try {
+      await updateAiActive(workspaceId, next);
+      showToast(next ? "Lewy is active again" : "Lewy is paused — you're handling replies");
+    } catch {
+      showToast("Couldn't update — try again");
+    }
+  }
 
   async function handleSignOut() {
     await supabase.auth.signOut();
@@ -144,7 +161,11 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
       >
         <span className={active ? item.color : "text-white/35"}><Icon /></span>
         <span className="flex-1">{item.label}</span>
-        {item.badge ? (
+        {item.href === "/dashboard/handover" ? (
+          handoverCount > 0 && (
+            <span className="bg-red-600 text-[10px] px-1.5 py-0.5 rounded-full leading-none animate-pulse">{handoverCount}</span>
+          )
+        ) : item.badge ? (
           <span className="bg-indigo-600 text-[10px] px-1.5 py-0.5 rounded-full leading-none">{item.badge}</span>
         ) : null}
       </Link>
@@ -166,10 +187,17 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
       <div className="mx-3 mb-4 rounded-2xl border border-transparent bg-gradient-to-br from-indigo-500/[0.13] to-white/[0.02] p-3.5">
         <div className="text-[10px] text-white/40 tracking-wide">WORKSPACE</div>
         <div className="font-semibold text-[13px] mt-1">Amina&apos;s Salon</div>
-        <div className="flex items-center gap-1.5 mt-2.5 text-[11px] text-emerald-300">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
-          AI is active
-        </div>
+        <button onClick={handleToggleAi} className="flex items-center gap-1.5 mt-2.5 text-[11px] w-full">
+          <span
+            className={`w-1.5 h-1.5 rounded-full ${
+              aiActive ? "bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.8)]" : "bg-white/25"
+            }`}
+          />
+          <span className={aiActive ? "text-emerald-300" : "text-white/40"}>
+            {aiActive ? "AI is active" : "AI is paused"}
+          </span>
+          <span className="ml-auto text-white/25 underline">{aiActive ? "Pause" : "Resume"}</span>
+        </button>
       </div>
 
       <div className="flex-1 overflow-y-auto pb-3">
@@ -246,6 +274,15 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
             </button>
           </div>
         </header>
+
+        {handoverCount > 0 && pathname !== "/dashboard/conversations" && (
+          <a
+            href="/dashboard/handover"
+            className="flex items-center justify-center gap-2 bg-red-600/90 hover:bg-red-600 transition text-white text-[13px] font-medium px-4 py-2.5 text-center"
+          >
+            🔴 ACTION REQUIRED: {handoverCount} customer{handoverCount > 1 ? "s" : ""} need{handoverCount === 1 ? "s" : ""} you →
+          </a>
+        )}
 
         <div className="flex-1">{children}</div>
       </div>

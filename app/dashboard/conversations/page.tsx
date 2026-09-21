@@ -5,6 +5,7 @@ import Reveal from "@/components/Reveal";
 import { useToast } from "@/components/Toast";
 import { supabase } from "@/lib/supabaseClient";
 import { getOrCreateWorkspace, getProducts, buildKnowledgeContext, emptyKnowledge, type KnowledgeAnswers, type Product } from "@/lib/workspace";
+import { detectEscalation, escalateConversation, reasonLabels } from "@/lib/handover";
 
 type Sender = "customer" | "ai" | "human";
 type Message = { from: Sender; text: string };
@@ -55,10 +56,12 @@ export default function ConversationsPage() {
   const [ownerInput, setOwnerInput] = useState("");
   const [lewyTyping, setLewyTyping] = useState(false);
   const [businessContext, setBusinessContext] = useState<string | null>(null);
+  const [workspaceId, setWorkspaceId] = useState<string | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(async ({ data }) => {
       const workspace = await getOrCreateWorkspace(data.session.user.id);
+      setWorkspaceId(workspace.id);
       const answers: KnowledgeAnswers = { ...emptyKnowledge, ...(workspace.knowledge_answers || {}) };
       const products: Product[] = await getProducts(workspace.id);
       setBusinessContext(buildKnowledgeContext(answers, products));

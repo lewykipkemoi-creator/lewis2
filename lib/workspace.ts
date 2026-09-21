@@ -69,6 +69,14 @@ export type Workspace = {
   ai_active: boolean;
 };
 
+export async function updateAiActive(workspaceId: string, active: boolean) {
+  const { error } = await supabase
+    .from("workspaces")
+    .update({ ai_active: active })
+    .eq("id", workspaceId);
+  if (error) throw error;
+}
+
 export async function getOrCreateWorkspace(userId: string): Promise<Workspace> {
   const { data: existing, error: fetchErr } = await supabase
     .from("workspaces")
