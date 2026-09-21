@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
+import { getOrCreateWorkspace } from "@/lib/workspace";
 
 const IconZap = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg>
@@ -38,8 +39,9 @@ export default function LoginPage() {
       setError(error.message);
       return;
     }
-    const onboarded = data.user?.user_metadata?.onboarded;
-    router.push(onboarded ? "/dashboard" : "/onboarding");
+    if (!data.user) return;
+    const workspace = await getOrCreateWorkspace(data.user.id);
+    router.push(workspace.onboarding_completed_at ? "/dashboard" : "/onboarding");
   }
 
   return (

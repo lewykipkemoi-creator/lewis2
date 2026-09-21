@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { ChannelIcon } from "@/components/ChannelIcon";
+import { getOrCreateWorkspace, saveKnowledgeAnswers } from "@/lib/workspace";
 
 type Answers = {
   businessName: string;
@@ -142,9 +143,11 @@ export default function OnboardingPage() {
 
   async function finishOnboarding() {
     setSaving(true);
-    await supabase.auth.updateUser({
-      data: { onboarded: true, business_knowledge: answers, connected_channels: connected },
-    });
+    try {
+      await saveKnowledgeAnswers(workspaceId, { ...answers, services: [] }, true);
+    } catch (err) {
+      console.error("Failed to save onboarding data:", err);
+    }
     setSaving(false);
     router.push("/dashboard");
   }

@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
 import { useToast } from "@/components/Toast";
+import { supabase } from "@/lib/supabaseClient";
+import { getOrCreateWorkspace, getProducts, buildKnowledgeContext, emptyKnowledge, type KnowledgeAnswers, type Product } from "@/lib/workspace";
 
 type Sender = "customer" | "ai" | "human";
 type Message = { from: Sender; text: string };
@@ -52,6 +54,16 @@ export default function ConversationsPage() {
   const [simInput, setSimInput] = useState("");
   const [ownerInput, setOwnerInput] = useState("");
   const [lewyTyping, setLewyTyping] = useState(false);
+  const [businessContext, setBusinessContext] = useState<string | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(async ({ data }) => {
+      const workspace = await getOrCreateWorkspace(data.session.user.id);
+      const answers: KnowledgeAnswers = { ...emptyKnowledge, ...(workspace.knowledge_answers || {}) };
+      const products: Product[] = await getProducts(workspace.id);
+      setBusinessContext(buildKnowledgeContext(answers, products));
+    });
+  }, []);
 
   const active = threads[selected];
 
@@ -74,7 +86,7 @@ export default function ConversationsPage() {
       const res = await fetch("/api/generate-reply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customerMessage: text }),
+        body: JSON.stringify({ customerMessage: text, businessContext }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
