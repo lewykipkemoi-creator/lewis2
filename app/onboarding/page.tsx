@@ -91,10 +91,16 @@ export default function OnboardingPage() {
   const [connected, setConnected] = useState<string[]>([]);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [workspaceId, setWorkspaceId] = useState<string | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (!data.session) router.push("/login");
+    supabase.auth.getSession().then(async ({ data }) => {
+      if (!data.session) {
+        router.push("/login");
+        return;
+      }
+      const workspace = await getOrCreateWorkspace(data.session.user.id);
+      setWorkspaceId(workspace.id);
     });
   }, [router]);
 
@@ -142,6 +148,7 @@ export default function OnboardingPage() {
   }
 
   async function finishOnboarding() {
+    if (!workspaceId) return;
     setSaving(true);
     try {
       await saveKnowledgeAnswers(workspaceId, { ...answers, services: [] }, true);
