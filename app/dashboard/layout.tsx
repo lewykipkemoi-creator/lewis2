@@ -12,6 +12,8 @@ import {
 } from "@/components/icons";
 import { ToastProvider, useToast } from "@/components/Toast";
 import Modal from "@/components/Modal";
+import { getOrCreateWorkspace, updateAiActive } from "@/lib/workspace";
+import { getPendingHandoverCount } from "@/lib/handover";
 
 const nav = [
   { label: "Overview", subtitle: "Revenue command center", href: "/dashboard", icon: IconOverview, color: "text-indigo-300", section: "main" },
@@ -101,10 +103,22 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
   const [handoverCount, setHandoverCount] = useState(0);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(async ({ data }) => {
       setSession(data.session);
       setChecked(true);
-      if (!data.session) router.push("/login");
+      if (!data.session) {
+        router.push("/login");
+        return;
+      }
+      const workspace = await getOrCreateWorkspace(data.session.user.id);
+      if (!workspace.onboarding_completed_at) {
+        router.push("/onboarding");
+        return;
+      }
+      setWorkspaceId(workspace.id);
+      setAiActive(workspace.ai_active);
+      const count = await getPendingHandoverCount(workspace.id);
+      setHandoverCount(count);
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -123,11 +137,14 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
   }, [pathname, workspaceId]);
 
   async function handleToggleAi() {
+    if (!workspaceId) return;
+    const next = !aiActive;
     setAiActive(next);
     try {
       await updateAiActive(workspaceId, next);
       showToast(next ? "Lewy is active again" : "Lewy is paused — you're handling replies");
     } catch {
+      setAiActive(!next);
       showToast("Couldn't update — try again");
     }
   }
