@@ -7,6 +7,6 @@ html {
 }
 
 body {
-  background-color: #07070c;
+  background-color: linear-gradient(to bottom right,black,purple, blue);
   color: #ffffff;
 }
