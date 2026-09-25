@@ -1,4 +1,12 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Reveal from "@/components/Reveal";
+import { useToast } from "@/components/Toast";
+import { supabase } from "@/lib/supabaseClient";
+import { getOrCreateWorkspace } from "@/lib/workspace";
+import { createPendingTransaction } from "@/lib/transactions";
 import { IconAlertTriangle, IconClock, IconPercent, IconTrendUp } from "@/components/icons";
 
 const stats = [
@@ -38,6 +46,25 @@ const columns = [
 ];
 
 export default function LeadsPage() {
+  const router = useRouter();
+  const { showToast } = useToast();
+  const [closingName, setClosingName] = useState<string | null>(null);
+
+  async function markAsWon(name: string, interest: string) {
+    setClosingName(name);
+    try {
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) return;
+      const workspace = await getOrCreateWorkspace(data.session.user.id);
+      await createPendingTransaction(workspace.id, name, interest);
+      showToast(`${name} marked as won — confirm payment to continue`);
+      router.push("/dashboard");
+    } catch {
+      showToast("Couldn't log this sale — try again");
+      setClosingName(null);
+    }
+  }
+
   return (
     <div className="max-w-5xl px-4 sm:px-6 lg:px-10 py-6 lg:py-8">
       <Reveal>
@@ -87,6 +114,13 @@ export default function LeadsPage() {
                     <span className="text-white/45">Next: </span>
                     <span className="text-white/75">{lead.next}</span>
                   </div>
+                  <button
+                    onClick={() => markAsWon(lead.name, lead.interest)}
+                    disabled={closingName === lead.name}
+                    className="w-full mt-2.5 text-[12px] bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 rounded-lg py-2 font-medium transition"
+                  >
+                    {closingName === lead.name ? "Logging sale…" : "Mark as Won — Log Sale"}
+                  </button>
                 </div>
               ))}
             </div>

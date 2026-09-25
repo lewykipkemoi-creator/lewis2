@@ -14,6 +14,7 @@ import { ToastProvider, useToast } from "@/components/Toast";
 import Modal from "@/components/Modal";
 import { getOrCreateWorkspace, updateAiActive } from "@/lib/workspace";
 import { getPendingHandoverCount } from "@/lib/handover";
+import { getPendingReconciliation, confirmTransaction, type PendingTransaction } from "@/lib/transactions";
 
 const nav = [
   { label: "Overview", subtitle: "Revenue command center", href: "/dashboard", icon: IconOverview, color: "text-indigo-300", section: "main" },
@@ -29,6 +30,92 @@ const nav = [
   { label: "Channels", subtitle: "Connected communication channels", href: "/dashboard/channels", icon: IconChannels, color: "text-cyan-300", section: "integrations" },
   { label: "Settings", subtitle: "Workspace configuration", href: "/dashboard/settings", icon: IconSettings, color: "text-white/50", section: "integrations" },
 ];
+
+function ReconciliationModal({
+  transaction,
+  userId,
+  onResolved,
+}: {
+  transaction: PendingTransaction;
+  userId: string;
+  onResolved: () => void;
+}) {
+  const { showToast } = useToast();
+  const [amount, setAmount] = useState("");
+  const [status, setStatus] = useState<"paid" | "no_payment_made" | null>(null);
+  const [saving, setSaving] = useState(false);
+
+  async function handleConfirm() {
+    if (!status) {
+      showToast("Select whether payment was received");
+      return;
+    }
+    setSaving(true);
+    try {
+      await confirmTransaction(transaction.id, Number(amount) || 0, status, userId);
+      showToast("Revenue record updated");
+      onResolved();
+    } catch {
+      showToast("Couldn't save — try again");
+    }
+    setSaving(false);
+  }
+
+  return (
+    <div className="fixed inset-0 z-[300] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
+      <div className="w-full max-w-[420px] rounded-2xl bg-[#15151f] shadow-2xl p-6">
+        <div className="text-[11px] font-mono text-amber-300 uppercase tracking-wide">Payment confirmation required</div>
+        <h2 className="text-lg font-semibold mt-2">Close out this transaction to continue.</h2>
+        <p className="text-white/45 text-[13px] mt-2">
+          Confirm what happened with <span className="text-white/80 font-medium">{transaction.customer_name}</span> before
+          you can keep using the dashboard.
+        </p>
+
+        <div className="mt-5 space-y-3.5">
+          <div>
+            <label className="text-[11px] text-white/40 uppercase tracking-wide">Invoice amount (KES)</label>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder="0"
+              className="w-full mt-1.5 bg-white/5 rounded-lg px-3.5 py-2.5 text-[14px] outline-none focus:bg-white/8 placeholder:text-white/25"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] text-white/40 uppercase tracking-wide">Payment status</label>
+            <div className="flex gap-2 mt-1.5">
+              <button
+                onClick={() => setStatus("paid")}
+                className={`flex-1 rounded-lg py-2.5 text-[13px] font-medium transition ${
+                  status === "paid" ? "bg-emerald-600" : "bg-white/8 hover:bg-white/15"
+                }`}
+              >
+                Paid
+              </button>
+              <button
+                onClick={() => setStatus("no_payment_made")}
+                className={`flex-1 rounded-lg py-2.5 text-[13px] font-medium transition ${
+                  status === "no_payment_made" ? "bg-red-600" : "bg-white/8 hover:bg-white/15"
+                }`}
+              >
+                No payment made
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button
+          onClick={handleConfirm}
+          disabled={saving}
+          className="w-full mt-5 bg-gradient-to-r from-indigo-500 to-indigo-700 rounded-xl py-3 text-[14px] font-semibold hover:opacity-90 transition disabled:opacity-50"
+        >
+          {saving ? "Saving…" : "Confirm and continue"}
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function QuickActionModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { showToast } = useToast();
@@ -101,6 +188,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
   const [workspaceId, setWorkspaceId] = useState<string | null>(null);
   const [aiActive, setAiActive] = useState(true);
   const [handoverCount, setHandoverCount] = useState(0);
+  const [pendingTransaction, setPendingTransaction] = useState<PendingTransaction | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(async ({ data }) => {
@@ -119,6 +207,8 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
       setAiActive(workspace.ai_active);
       const count = await getPendingHandoverCount(workspace.id);
       setHandoverCount(count);
+      const pending = await getPendingReconciliation(workspace.id);
+      setPendingTransaction(pending);
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -133,6 +223,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
     setMobileOpen(false);
     if (workspaceId) {
       getPendingHandoverCount(workspaceId).then(setHandoverCount).catch(() => {});
+      getPendingReconciliation(workspaceId).then(setPendingTransaction).catch(() => {});
     }
   }, [pathname, workspaceId]);
 
@@ -305,6 +396,14 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
       </div>
 
       <QuickActionModal open={quickOpen} onClose={() => setQuickOpen(false)} />
+
+      {pendingTransaction && session && (
+        <ReconciliationModal
+          transaction={pendingTransaction}
+          userId={session.user.id}
+          onResolved={() => setPendingTransaction(null)}
+        />
+      )}
     </div>
   );
 }
